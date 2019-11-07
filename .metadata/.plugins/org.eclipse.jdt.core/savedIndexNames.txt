@@ -1,18 +1,4 @@
 INDEX VERSION 1.131+/Users/welkin/eclipse-workspace/.metadata/.plugins/org.eclipse.jdt.core
-3641353676.index
-1203183140.index
-374251874.index
-3693986112.index
-1912180266.index
-2858419967.index
-3450815487.index
-2501786644.index
-3068668248.index
-1555235333.index
-3451962965.index
-3671542375.index
-1902029524.index
+3655803167.index
 813990954.index
-557612249.index
-240197701.index
 2933920137.index
