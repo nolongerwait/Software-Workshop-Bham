@@ -1,0 +1,18 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - GenerateClass",
+            "request": "launch",
+            "mainClass": "GenerateClass",
+            "projectName": "WS1-3"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Counter",
+            "request": "launch",
+            "mainClass": "Counter",
+            "projectName": "WS1-3"
+        }
+    ]
+}
