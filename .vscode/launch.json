@@ -2,6 +2,12 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - Comment1",
+            "request": "launch",
+            "mainClass": "Comment1"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - Swap",
             "request": "launch",
             "mainClass": "Swap"
