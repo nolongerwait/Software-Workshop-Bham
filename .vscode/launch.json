@@ -2,6 +2,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - Aircraft",
+            "request": "launch",
+            "mainClass": "Aircraft",
+            "projectName": "WS1-4"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Aeroplane",
+            "request": "launch",
+            "mainClass": "Aeroplane",
+            "projectName": "WS1-4"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - Comment1",
             "request": "launch",
             "mainClass": "Comment1"
