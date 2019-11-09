@@ -1,3 +1,8 @@
+/**
+ * The class describes a journal subscription using the title of the journal, the email address to where the subscription is to be sent, and the cost in pounds.
+ * @author Zetian Qin zxq876
+ * @version 2019-11-09 17:04:46
+ */
 public class Subscription implements SubscriptionInterface {
     private String title;
     private String email;

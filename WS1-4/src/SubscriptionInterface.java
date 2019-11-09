@@ -1,7 +1,5 @@
 /**
- *  The class describes a journal subscription using the title of the
- *  journal, the email address to where the subscription is to be
- *  sent, and the cost in pounds.
+ *  The class describes a journal subscription using the title of the journal, the email address to where the subscription is to be sent, and the cost in pounds.
  *
  *  @version 2019-11-04
  *  @author  Manfred Kerber

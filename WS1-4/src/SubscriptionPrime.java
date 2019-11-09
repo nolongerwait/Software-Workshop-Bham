@@ -1,3 +1,8 @@
+/**
+ * The class describes a prime journal subscription. In addition to a standard subscription, the customer receives a hardcopy of the journal. In order to store the corresponding address, where the hardcopy is to be sent to, a field variable address of type String is used.
+ * @author Zetian Qin zxq876
+ * @version 2019-11-09 17:05:16
+ */
 public class SubscriptionPrime extends Subscription implements SubscriptionPrimeInterface {
     private String deliveryAddress;
 

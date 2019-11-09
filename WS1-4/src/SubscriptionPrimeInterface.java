@@ -1,9 +1,5 @@
 /**
- *  The class describes a prime journal subscription. In addition to a
- *  standard subscription, the customer receives a hardcopy of the
- *  journal. In order to store the corresponding address, where the
- *  hardcopy is to be sent to, a field variable address of type String
- *  is used.
+ *  The class describes a prime journal subscription. In addition to a standard subscription, the customer receives a hardcopy of the journal. In order to store the corresponding address, where the hardcopy is to be sent to, a field variable address of type String is used.
  *
  *  @version 2019-11-04
  *  @author  Manfred Kerber

@@ -1,6 +1,5 @@
 /**
- *  The class is used to represent music titles in form of a title, an
- *  artist, and a price, of types String, String, and int,
+ *  The class is used to represent music titles in form of a title, an artist, and a price, of types String, String, and int,
  *  respectively.  login attempts.
  *  @author Manfred Kerber
  *  @version 2019-11-04
