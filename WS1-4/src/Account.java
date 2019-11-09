@@ -11,6 +11,21 @@ public abstract class Account implements AccountInterface {
     private boolean loggedIn;
 
     /**
+     * Standard constructor of the abstract class Account.
+     * @param name The name of the user of the account.
+     * @param salutation The salutation of the account holder (e.g., "Mr", "Ms", "Mrs", "Dr", "Prof")
+     * @param email The email address of the account holder.
+     * @param password The password of the account.
+     * @param loggedIn true if the user is looged in, false else.
+     */
+    public Account(String name, String salutation, String email, String password, boolean loggedIn) {
+        this.name = name;
+        this.salutation = salutation;
+        this.email = email;
+        this.password = password;
+        this.loggedIn = loggedIn;
+    }
+    /**
      *  We require in each sub-class the existence of a login method.
      *  @param password The password provided that will be compared to the password stored on the system, i.e., the value of the field variable. If the password provided is correct, the field variable loggedIn is changes to true, else a warning is to be printed.
      */
