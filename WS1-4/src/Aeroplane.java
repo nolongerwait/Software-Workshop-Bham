@@ -41,12 +41,13 @@ public class Aeroplane extends Aircraft {
         this.fuelConsumption = fuelConsumption;
     }
 
+    @Override
     /**
      * This toString defines how to print a Aeroplane.
      * @return the print type of the Aeroplane as String.
      */
     public String toString() {
-        return "Aerplane{" + "passengerNumber = " + this.getPassengerNumber() + ", maxSpeed = " + this.getMaxSpeed() + ", fuelConsumption = " + this.fuelConsumption;
+        return "Aerplane{" + "passengerNumber = " + this.getPassengerNumber() + ", maxSpeed = " + this.getMaxSpeed() + ", fuelConsumption = " + this.fuelConsumption + "}";
     }
 
 }
