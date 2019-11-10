@@ -25,6 +25,7 @@ public abstract class Account implements AccountInterface {
         this.password = password;
         this.loggedIn = loggedIn;
     }
+    
     /**
      *  We require in each sub-class the existence of a login method.
      *  @param password The password provided that will be compared to the password stored on the system, i.e., the value of the field variable. If the password provided is correct, the field variable loggedIn is changes to true, else a warning is to be printed.
