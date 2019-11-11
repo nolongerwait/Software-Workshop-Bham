@@ -104,7 +104,14 @@ public abstract class Account implements AccountInterface {
      * @param password The provided password to which the password of the this object is compared.
      * @return true if the password of the account agrees with the argument, false else.
      */
-    public abstract boolean checkPassword(String password);
+    public boolean checkPassword(String password) {
+        if(this.password == password) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
     /**
      * Standard toString method to represent the object in a human readable form.
@@ -117,5 +124,12 @@ public abstract class Account implements AccountInterface {
      * @param oldPassword The current password.
      * @param newPassword The future password.
      */
-    public abstract void changePassword(String oldPassword, String newPassword);
+    public void changePassword(String oldPassword, String newPassword) {
+        if(this.checkPassword(oldPassword)) {
+            this.setPassword(newPassword);
+        }
+        else {
+            System.out.println("The old password is incorrect!");
+        }
+    }
 }
