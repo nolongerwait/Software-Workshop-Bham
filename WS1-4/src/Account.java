@@ -22,6 +22,7 @@ public abstract class Account implements AccountInterface {
         this.salutation = salutation;
         this.email = email;
         this.password = password;
+        this.loggedIn = false;
     }
     
     /**
@@ -123,11 +124,16 @@ public abstract class Account implements AccountInterface {
      * @param newPassword The future password.
      */
     public void changePassword(String oldPassword, String newPassword) {
-        if(this.checkPassword(oldPassword)) {
-            this.setPassword(newPassword);
+        if(this.getLoggedIn()) {
+            if(this.checkPassword(oldPassword)) {
+                this.setPassword(newPassword);
+            }
+            else {
+                System.out.println("The old password is incorrect!");
+            }
         }
         else {
-            System.out.println("The old password is incorrect!");
+            System.out.println("You are not logged in!");
         }
     }
 }
