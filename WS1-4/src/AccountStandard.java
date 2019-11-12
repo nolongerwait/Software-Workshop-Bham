@@ -11,7 +11,7 @@ public class AccountStandard extends Account implements AccountStandardInterface
     private ArrayList<MusicTitle> titlesBought;
     private int failedLoginAttempts;
     
-    public static final int MAXIMALLOGINATTEMPTS = 3;
+    public static final int MAXIMAL_LOGIN_ATTEMPTS = 3;
 
     /**
      * Standard constructor of the abstract class AccountStandard.
@@ -19,16 +19,12 @@ public class AccountStandard extends Account implements AccountStandardInterface
      * @param salutation The salutation of the account holder (e.g., "Mr", "Ms", "Mrs", "Dr", "Prof")
      * @param email The email address of the account holder.
      * @param password The password of the account.
-     * @param loggedIn true if the user is looged in, false else.
-     * @param balance The balance of the account.
-     * @param titlesBought The current list of titles bought by the user.
-     * @param failedLoginAttempts The number of failed login attempts.
      */
-    public AccountStandard(String name, String salutation, String email, String password, boolean loggedIn, int balance, ArrayList<MusicTitle> titlesBought, int failedLoginAttempts) {
-        super(name, salutation, email, password, loggedIn);
-        this.balance = balance;
-        this.titlesBought = titlesBought;
-        this.failedLoginAttempts = failedLoginAttempts;
+    public AccountStandard(String name, String salutation, String email, String password) {
+        super(name, salutation, email, password);
+        this.balance = 0;
+        this.titlesBought = new ArrayList<MusicTitle>();
+        this.failedLoginAttempts = 0;
     }
 
     /**
@@ -44,7 +40,7 @@ public class AccountStandard extends Account implements AccountStandardInterface
      *  @param password The password provided for the login; this is to be compared to the password stored on the system.
      */
     public void login(String password) {
-        if(this.failedLoginAttempts < MAXIMALLOGINATTEMPTS) {
+        if(this.failedLoginAttempts < MAXIMAL_LOGIN_ATTEMPTS) {
             if(this.checkPassword(password)) {
                 this.setFailedLoginAttempts(0);
                 this.setLoggedIn(true);
@@ -105,7 +101,18 @@ public class AccountStandard extends Account implements AccountStandardInterface
      *  buy.
      */
     public void buy(MusicTitle musicTitle) {
-
+        if(getLoggedIn()) {
+            if((this.getBalance() - musicTitle.getPrice()) >= 0) {
+                this.setBalance(this.getBalance() - musicTitle.getPrice());
+                this.titlesBought.add(musicTitle);
+            }
+            else {
+                System.out.println("You should pay enough money into your account.");
+            }
+        }
+        else {
+            System.out.println("You are not logged in!\nPlease login first!");
+        }
     }
 
     @Override

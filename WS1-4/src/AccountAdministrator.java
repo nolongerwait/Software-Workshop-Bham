@@ -6,7 +6,7 @@ import java.util.ArrayList;
  *  @author Zetian Qin zxq876
  *  @version 2019-11-11 17:34:53
  */
-public class AccountAdminstrator extends Account implements AccountAdministratorInterface {
+public class AccountAdministrator extends Account implements AccountAdministratorInterface {
     private ArrayList<Account> accounts;
 
     /** 
@@ -15,12 +15,10 @@ public class AccountAdminstrator extends Account implements AccountAdministrator
      * @param salutation The salutation of the account holder (e.g., "Mr", "Ms", "Mrs", "Dr", "Prof")
      * @param email The email address of the account holder.
      * @param password The password of the account.
-     * @param loggedIn true if the user is looged in, false else.
-     * @param accounts The list of accounts the administrator looks after.
      */
-    public AccountAdminstrator(String name, String salutation, String email, String password, boolean loggedIn, ArrayList<Account> accounts) {
-        super(name, salutation, email, password, loggedIn);
-        this.accounts = accounts;
+    public AccountAdministrator(String name, String salutation, String email, String password) {
+        super(name, salutation, email, password);
+        this.accounts = new ArrayList<Account>();
     }
 
     /**
