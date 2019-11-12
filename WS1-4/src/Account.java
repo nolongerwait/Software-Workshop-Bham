@@ -86,7 +86,7 @@ public abstract class Account implements AccountInterface {
      * @return The password of the account.
      */
     public String getPassword() {
-        return this.password;
+        return password;
     }
 
     /**

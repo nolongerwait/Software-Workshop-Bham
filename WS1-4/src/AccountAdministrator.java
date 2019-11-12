@@ -43,9 +43,9 @@ public class AccountAdministrator extends Account implements AccountAdministrato
      *  @param password The new password for the account that is to be reset.
      */
     public void resetAccount(Account account, String password) {
+        account.setPassword(password);
         if(account instanceof AccountStandard) {
             ((AccountStandard) account).setFailedLoginAttempts(0);
-            ((AccountStandard) account).setPassword(password);
         }
     }
 
@@ -72,7 +72,7 @@ public class AccountAdministrator extends Account implements AccountAdministrato
      */
     public String toString() {
         if(this.getLoggedIn()) {
-            return "AccountAdminstrator{" + this.getSalutation() + " " + this.getName() + ", \n You are logged in." + "}";
+            return "AccountAdminstrator{\n" + this.getSalutation() + " " + this.getName() + ", \n You are logged in." + "\n}";
         }
         else {
             return "No user log in!";

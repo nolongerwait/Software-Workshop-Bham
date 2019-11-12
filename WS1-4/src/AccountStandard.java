@@ -123,7 +123,7 @@ public class AccountStandard extends Account implements AccountStandardInterface
      */
     public String toString() {
         if(this.getLoggedIn()) {
-            return "AccountStandard{" + this.getSalutation() + " " + this.getName() + ", \n You are logged in." + "}";
+            return "AccountStandard{\n" + this.getSalutation() + " " + this.getName() + ", \n You are logged in." + "\n}";
         }
         else {
             return "No user log in!";
