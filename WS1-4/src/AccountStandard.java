@@ -97,11 +97,10 @@ public class AccountStandard extends Account implements AccountStandardInterface
 
     /** 
      *  If the user is logged in and has sufficient funds, a music title is bought by adding the title to the ArrayList of titlesBought of the customer. Furthermore the price of the title is subtracted from the funds of the customer. If the user is not logged in, a corresponding warning is to be printed. Likewise if the user has insufficient funds, they should be asked to pay money into their account.
-     *  @param musicTitle The music title that the customer wants to
-     *  buy.
+     *  @param musicTitle The music title that the customer wants to buy.
      */
     public void buy(MusicTitle musicTitle) {
-        if(getLoggedIn()) {
+        if(this.getLoggedIn()) {
             if((this.getBalance() - musicTitle.getPrice()) >= 0) {
                 this.setBalance(this.getBalance() - musicTitle.getPrice());
                 this.titlesBought.add(musicTitle);
