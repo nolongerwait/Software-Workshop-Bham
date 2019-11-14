@@ -1,118 +1,128 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
 
 /**
- * Public tests for Exercise 1, Worksheet 4.
- * 
- * @author Alexandros Evangelidis
- * @version 2019-11-11
+ * In Self-Testing, the code should be tested against three different types, normal cases, boundary cases, and illegal cases.
+ * <p>
+ * This class contains 6 tests to test all the functions in class Aircraft and Aeroplane.
+ * @author Zetian Qin zxq876
+ * @version 2019-11-03 19:16:55
  */
 public class AircraftTests {
   public static final double TOLERANCE = 0.0000000001;
-  private Aircraft aircraft1, aircraft2;
-  private Aeroplane aeroplane;
+
+  private Aircraft aircraftTest1, aircraftTest2;
+  private Aeroplane aeroplaneTest;
 
   @BeforeEach
-  public void init() {
+  public void setup(TestInfo testInfo) {
+    System.out.println("Start......" + testInfo.getDisplayName());
 
-    aircraft1 = new Aircraft(300, 870);
-    aeroplane = new Aeroplane(350, 850, 13);
-    aircraft2 = new Aeroplane(280, 800, 14.5);
+    //Test for class Aircraft
+    aircraftTest1 = new Aircraft(200, 900);
+    //Test for class Aerocraft
+    aeroplaneTest = new Aeroplane(300, 800, 20);
+    //Test for Polymorphism 
+    aircraftTest2 = new Aeroplane(350, 850, 19.9);
   }
 
-  // testing getters of aircraft1
   @Test
+  @DisplayName("Getter Tests in class Aircraft")
   public void test1() {
-
-    int expectedNumOfPassengers = 300;
-    int actualNumOfPassengers = aircraft1.getPassengerNumber();
+    int expectedNumOfPassengers = 200;
+    int actualNumOfPassengers = aircraftTest1.getPassengerNumber();
     assertEquals(expectedNumOfPassengers, actualNumOfPassengers);
 
-    int expectedMaxSpeed = 870;
-    int actualMaxSpeed = aircraft1.getMaxSpeed();
+    int expectedMaxSpeed = 900;
+    int actualMaxSpeed = aircraftTest1.getMaxSpeed();
     assertEquals(expectedMaxSpeed, actualMaxSpeed);
   }
 
-  // testing getters of aeroplane
   @Test
+  @DisplayName("Setter Tests in class Aircraft")
   public void test2() {
-
-    int expectedNumOfPassengers = 350;
-    int actualNumOfPassengers = aeroplane.getPassengerNumber();
+    aircraftTest1.setPassengerNumber(322);
+    int expectedNumOfPassengers = 322;
+    int actualNumOfPassengers = aircraftTest1.getPassengerNumber();
     assertEquals(expectedNumOfPassengers, actualNumOfPassengers);
 
-    int expectedMaxSpeed = 850;
-    int actualMaxSpeed = aeroplane.getMaxSpeed();
+    aircraftTest1.setMaxSpeed(888);
+    int expectedMaxSpeed = 888;
+    int actualMaxSpeed = aircraftTest1.getMaxSpeed();
     assertEquals(expectedMaxSpeed, actualMaxSpeed);
-
-    double expectedFuelCons = 13;
-    double actualFuelCons = aeroplane.getFuelConsumption();
-    assertEquals(expectedFuelCons, actualFuelCons, TOLERANCE);
   }
 
-  // testing setters of aircraft1
   @Test
+  @DisplayName("Getter Tests in class Aeroplane")
   public void test3() {
-
-    aircraft1.setPassengerNumber(320);
-    int expectedNumOfPassengers = 320;
-    int actualNumOfPassengers = aircraft1.getPassengerNumber();
-    assertEquals(expectedNumOfPassengers, actualNumOfPassengers);
-
-    aircraft1.setMaxSpeed(770);
-    int expectedMaxSpeed = 770;
-    int actualMaxSpeed = aircraft1.getMaxSpeed();
-    assertEquals(expectedMaxSpeed, actualMaxSpeed);
-  }
-
-  // testing setters of aeroplane
-  @Test
-  public void test4() {
-
-    aeroplane.setPassengerNumber(365);
-    int expectedNumOfPassengers = 365;
-    int actualNumOfPassengers = aeroplane.getPassengerNumber();
-    assertEquals(expectedNumOfPassengers, actualNumOfPassengers);
-
-    aeroplane.setMaxSpeed(863);
-    int expectedMaxSpeed = 863;
-    int actualMaxSpeed = aeroplane.getMaxSpeed();
-    assertEquals(expectedMaxSpeed, actualMaxSpeed);
-
-
-    aeroplane.setFuelConsumption(13.95);
-    double expectedFuelCons = 13.95;
-    double actualFuelCons = aeroplane.getFuelConsumption();
-    assertEquals(expectedFuelCons, actualFuelCons, TOLERANCE);
-  }
-
-
-  // testing getters of aircraft2
-  @Test
-  public void test5() {
-
-    int expectedNumOfPassengers = 280;
-    int actualNumOfPassengers = aircraft2.getPassengerNumber();
+    int expectedNumOfPassengers = 300;
+    int actualNumOfPassengers = aeroplaneTest.getPassengerNumber();
     assertEquals(expectedNumOfPassengers, actualNumOfPassengers);
 
     int expectedMaxSpeed = 800;
-    int actualMaxSpeed = aircraft2.getMaxSpeed();
+    int actualMaxSpeed = aeroplaneTest.getMaxSpeed();
     assertEquals(expectedMaxSpeed, actualMaxSpeed);
+
+    double expectedFuelCons = 20;
+    double actualFuelCons = aeroplaneTest.getFuelConsumption();
+    assertEquals(expectedFuelCons, actualFuelCons, TOLERANCE);
   }
 
-  // testing setters of aircraft2
   @Test
-  public void test6() {
-
-    aircraft2.setPassengerNumber(290);
-    int expectedNumOfPassengers = 290;
-    int actualNumOfPassengers = aircraft2.getPassengerNumber();
+  @DisplayName("Setter Tests in class Aeroplane")
+  public void test4() {
+    aeroplaneTest.setPassengerNumber(333);
+    int expectedNumOfPassengers = 333;
+    int actualNumOfPassengers = aeroplaneTest.getPassengerNumber();
     assertEquals(expectedNumOfPassengers, actualNumOfPassengers);
 
-    aircraft2.setMaxSpeed(835);
-    int expectedMaxSpeed = 835;
-    int actualMaxSpeed = aircraft2.getMaxSpeed();
+    aeroplaneTest.setMaxSpeed(777);
+    int expectedMaxSpeed = 777;
+    int actualMaxSpeed = aeroplaneTest.getMaxSpeed();
+    assertEquals(expectedMaxSpeed, actualMaxSpeed);
+
+
+    aeroplaneTest.setFuelConsumption(11.11);
+    double expectedFuelCons = 11.11;
+    double actualFuelCons = aeroplaneTest.getFuelConsumption();
+    assertEquals(expectedFuelCons, actualFuelCons, TOLERANCE);
+  }
+
+  @Test
+  @DisplayName("Getter Tests for Polymorphism")
+  public void test5() {
+
+    int expectedNumOfPassengers = 350;
+    int actualNumOfPassengers = aircraftTest2.getPassengerNumber();
+    assertEquals(expectedNumOfPassengers, actualNumOfPassengers);
+
+    int expectedMaxSpeed = 850;
+    int actualMaxSpeed = aircraftTest2.getMaxSpeed();
     assertEquals(expectedMaxSpeed, actualMaxSpeed);
   }
+
+  @Test
+  @DisplayName("Setter Tests for Polymorphism")
+  public void test6() {
+
+    aircraftTest2.setPassengerNumber(222);
+    int expectedNumOfPassengers = 222;
+    int actualNumOfPassengers = aircraftTest2.getPassengerNumber();
+    assertEquals(expectedNumOfPassengers, actualNumOfPassengers);
+
+    aircraftTest2.setMaxSpeed(888);
+    int expectedMaxSpeed = 888;
+    int actualMaxSpeed = aircraftTest2.getMaxSpeed();
+    assertEquals(expectedMaxSpeed, actualMaxSpeed);
+  }
+
+  @AfterEach
+	public void tearDown(TestInfo testInfo) {
+		System.out.println("Finished..." + testInfo.getDisplayName());
+	}
 }
