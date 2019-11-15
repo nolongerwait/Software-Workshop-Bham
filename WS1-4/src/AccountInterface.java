@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 /**
  *  The Account class should have 5 field variables, namely, name,
  *  salutation, email, password, and loggedIn of types String, String,
