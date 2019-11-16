@@ -44,11 +44,16 @@ public class AccountStandard extends Account implements AccountStandardInterface
             if(this.checkPassword(password)) {
                 this.setFailedLoginAttempts(0);
                 this.setLoggedIn(true);
+                System.out.println("Login successfully!");
             }
             else {
                 this.failedLoginAttempts++;
                 this.setLoggedIn(false);
+                System.out.println("Failed to login!");
             }
+        }
+        else {
+            System.out.println("Your Account is locked due to too many failed login attempts!");
         }
     }
 

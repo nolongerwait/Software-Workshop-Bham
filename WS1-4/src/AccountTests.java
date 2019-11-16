@@ -46,42 +46,41 @@ public class AccountTests {
         //Test for MusicTitle.getTitle()
         String expectedTitle = "Hyde Park Live";
         String actualTitle = musicTitleTest1.getTitle();
-        assertEquals(expectedTitle, actualTitle, "title should be: " + actualTitle);
+        assertEquals(expectedTitle, actualTitle);
 
         //Test for Music.getArtist()
         String expectedArtist = "Rolling Stones";
         String actualArtist = musicTitleTest1.getArtist();
-        assertEquals(expectedArtist, actualArtist, "artist should be: " + actualArtist);
+        assertEquals(expectedArtist, actualArtist);
 
         //Test for Music.getPrice()
         int expectedPrice = 18;
         int actualPrice = musicTitleTest1.getPrice();
-        assertEquals(expectedPrice, actualPrice, "artist should be: " + actualPrice);
+        assertEquals(expectedPrice, actualPrice);
     }
 
-    // testing customerJohn's getName()
     @Test
     @DisplayName("Getter Tests in class AcccountStandard")
     public void test2() {
         //Test for AccountStandard.getName()
         String expectedName = "John";
         String actualName = customerTest.getName();
-        assertEquals(expectedName, actualName, "name should be: " + actualName);
+        assertEquals(expectedName, actualName);
 
         //Test for AccountStandard.getSalutation()
         String expectedSalutation = "Mr";
         String actualSalutation = customerTest.getSalutation();
-        assertEquals(expectedSalutation, actualSalutation, "salutation should be: " + actualSalutation);
+        assertEquals(expectedSalutation, actualSalutation);
 
         //Test for AccountStandard.getEmail()
         String expectedEmail = "john@john.org";
         String actualEmail = customerTest.getEmail();
-        assertEquals(expectedEmail, actualEmail, "email should be: " + actualEmail);
+        assertEquals(expectedEmail, actualEmail);
 
         //Test for AccountStandard.getBalance()
         int expectedBalance = 0;
         int actualBalance = customerTest.getBalance();
-        assertEquals(expectedBalance, actualBalance, "balance should be: " + actualBalance);
+        assertEquals(expectedBalance, actualBalance);
 
         //Test for AccountStandard.getTitlesBought()
         ArrayList<MusicTitle> expectedPurchaseList = new ArrayList<>();
@@ -93,180 +92,211 @@ public class AccountTests {
         //Test for AccountStandard.getFailedLoginAttempts()
         int expectedFailedLoginAttempts = 0;
         int actualFailedLoginAttempts = customerTest.getFailedLoginAttempts();
-        assertEquals(expectedFailedLoginAttempts, actualFailedLoginAttempts, "failed login attempts should be: " + actualFailedLoginAttempts);
+        assertEquals(expectedFailedLoginAttempts, actualFailedLoginAttempts);
     }
 
-    // testing customerJohn's getTitlesBought()
     @Test
-    public void test8() {
-        
-    }
-
-    // testing customerJohn's getFailedLoginAttempts()
-    @Test
-    public void test9() {
-        
-    }
-
-    // testing MAXIMAL_LOGIN_ATTEMPTS
-    @Test
-    public void test10() {
+    @DisplayName("Test to check the MAXIMAL_LOGIN_ATTEMPTS")
+    public void test3() {
         int expectedMaximalLoginAttempts = 3;
         int actualMaximalLoginAttempts = AccountStandard.MAXIMAL_LOGIN_ATTEMPTS;
-        assertEquals(expectedMaximalLoginAttempts, actualMaximalLoginAttempts,
-                "failed login attempts should be: " + actualMaximalLoginAttempts);
+        assertEquals(expectedMaximalLoginAttempts, actualMaximalLoginAttempts);
     }
 
-    // testing MAXIMAL_LOGIN_ATTEMPTS
     @Test
-    public void test11() {
-        int expectedMaximalLoginAttempts = 3;
-        int actualMaximalLoginAttempts = AccountStandard.MAXIMAL_LOGIN_ATTEMPTS;
-        assertEquals(expectedMaximalLoginAttempts, actualMaximalLoginAttempts,
-                "failed login attempts should be: " + actualMaximalLoginAttempts);
+    @DisplayName("Tests for login and logout")
+    public void test4() {
+        //Test for login successfully
+        customerTest.login("corn");
+        assertTrue(customerTest.getLoggedIn());
+
+        //Test for logout
+        customerTest.logout();
+        assertFalse(customerTest.getLoggedIn());
+
+        //Test for login unsuccessfully
+        customerTest.login("cOrn");
+        assertFalse(customerTest.getLoggedIn());
+        assertEquals(1, customerTest.getFailedLoginAttempts());
+
+        //Test for login unsuccessfully twice
+        customerTest.login("cOrn");
+        assertFalse(customerTest.getLoggedIn());
+        assertEquals(2, customerTest.getFailedLoginAttempts());
+
+        //Test for login unsuccessfully three times
+        customerTest.login("cOrn");
+        assertFalse(customerTest.getLoggedIn());
+        assertEquals(3, customerTest.getFailedLoginAttempts());
     }
 
-    // customerJohn logs in successfully and tries to make a purchase, which
-    // fails due to insufficient funds
     @Test
     public void test12() {
-        customerJohn.login("corn");
-        assertTrue(customerJohn.getLoggedIn());
+        customerTest.login("corn");
+        assertTrue(customerTest.getLoggedIn());
 
-        customerJohn.buy(musicTitle1);
-        ArrayList<MusicTitle> actualPurchaseList = customerJohn.getTitlesBought();
+        customerTest.buy(musicTitleTest1);
+        ArrayList<MusicTitle> actualPurchaseList = customerTest.getTitlesBought();
         assertTrue(actualPurchaseList.isEmpty());
     }
 
-    // customerJohn logs in unsuccessfully
+    // customerTest logs in unsuccessfully
     @Test
-    public void test13() {
-        customerJohn.login("cOrn");
-        assertFalse(customerJohn.getLoggedIn());
+    @DisplayName("Test for buy music.")
+    public void test5() {
+        ArrayList<MusicTitle> actualPurchaseList;
 
-        assertEquals(1, customerJohn.getFailedLoginAttempts());
-
-        customerJohn.buy(musicTitle1);
-        ArrayList<MusicTitle> actualPurchaseList = customerJohn.getTitlesBought();
+        //Fail to buy without login
+        customerTest.buy(musicTitleTest1);
+        actualPurchaseList = customerTest.getTitlesBought();
         assertTrue(actualPurchaseList.isEmpty());
-    }
+        assertFalse(customerTest.getLoggedIn());
 
-    // customerJohn tries to log in twice unsuccessfully
-    @Test
-    public void test14() {
-        customerJohn.login("cOrn");
-        assertFalse(customerJohn.getLoggedIn());
+        //Fail to buy due to insufficient balance
+        customerTest.login("corn");
+        assertTrue(customerTest.getLoggedIn());
 
-        assertEquals(1, customerJohn.getFailedLoginAttempts());
-
-        customerJohn.login("cOrn");
-        assertFalse(customerJohn.getLoggedIn());
-
-        assertEquals(2, customerJohn.getFailedLoginAttempts());
-
-        customerJohn.buy(musicTitle1);
-        ArrayList<MusicTitle> actualPurchaseList = customerJohn.getTitlesBought();
+        customerTest.buy(musicTitleTest1);
+        actualPurchaseList = customerTest.getTitlesBought();
         assertTrue(actualPurchaseList.isEmpty());
-    }
 
-    // customerJohn completes a purchase successfully
-    @Test
-    public void test15() {
-        customerJohn.login("cOrn");
-        assertFalse(customerJohn.getLoggedIn());
-
-        assertEquals(1, customerJohn.getFailedLoginAttempts());
-
-        customerJohn.login("cOrn");
-        assertFalse(customerJohn.getLoggedIn());
-
-        assertEquals(2, customerJohn.getFailedLoginAttempts());
-
-        customerJohn.login("corn");
-        assertTrue(customerJohn.getLoggedIn());
-
-        assertEquals(0, customerJohn.getFailedLoginAttempts());
-
-        customerJohn.deposit(20);
-        customerJohn.buy(musicTitle1);
+        //
+        customerTest.deposit(20);
+        customerTest.buy(musicTitleTest1);
 
         String expectedMusicTitle = "Hyde Park Live";
-        String actualMusicTitle = customerJohn.getTitlesBought().get(0).getTitle();
+        String actualMusicTitle = customerTest.getTitlesBought().get(0).getTitle();
         assertEquals(expectedMusicTitle, actualMusicTitle);
 
         String expectedArtist = "Rolling Stones";
-        String actualArtist = customerJohn.getTitlesBought().get(0).getArtist();
+        String actualArtist = customerTest.getTitlesBought().get(0).getArtist();
         assertEquals(expectedArtist, actualArtist);
 
         int expectedPrice = 18;
-        int actualPrice = customerJohn.getTitlesBought().get(0).getPrice();
+        int actualPrice = customerTest.getTitlesBought().get(0).getPrice();
         assertEquals(expectedPrice, actualPrice);
 
         int expectedBalance = 2;
-        int actualBalance = customerJohn.getBalance();
+        int actualBalance = customerTest.getBalance();
+        assertEquals(expectedBalance, actualBalance);
+    }
+
+    // customerTest tries to log in twice unsuccessfully
+    @Test
+    public void test14() {
+        customerTest.login("cOrn");
+        assertFalse(customerTest.getLoggedIn());
+
+        assertEquals(1, customerTest.getFailedLoginAttempts());
+
+        customerTest.login("cOrn");
+        assertFalse(customerTest.getLoggedIn());
+
+        assertEquals(2, customerTest.getFailedLoginAttempts());
+
+        customerTest.buy(musicTitleTest1);
+        ArrayList<MusicTitle> actualPurchaseList = customerTest.getTitlesBought();
+        assertTrue(actualPurchaseList.isEmpty());
+    }
+
+    // customerTest completes a purchase successfully
+    @Test
+    public void test15() {
+        customerTest.login("cOrn");
+        assertFalse(customerTest.getLoggedIn());
+
+        assertEquals(1, customerTest.getFailedLoginAttempts());
+
+        customerTest.login("cOrn");
+        assertFalse(customerTest.getLoggedIn());
+
+        assertEquals(2, customerTest.getFailedLoginAttempts());
+
+        customerTest.login("corn");
+        assertTrue(customerTest.getLoggedIn());
+
+        assertEquals(0, customerTest.getFailedLoginAttempts());
+
+        customerTest.deposit(20);
+        customerTest.buy(musicTitleTest1);
+
+        String expectedMusicTitle = "Hyde Park Live";
+        String actualMusicTitle = customerTest.getTitlesBought().get(0).getTitle();
+        assertEquals(expectedMusicTitle, actualMusicTitle);
+
+        String expectedArtist = "Rolling Stones";
+        String actualArtist = customerTest.getTitlesBought().get(0).getArtist();
+        assertEquals(expectedArtist, actualArtist);
+
+        int expectedPrice = 18;
+        int actualPrice = customerTest.getTitlesBought().get(0).getPrice();
+        assertEquals(expectedPrice, actualPrice);
+
+        int expectedBalance = 2;
+        int actualBalance = customerTest.getBalance();
         assertEquals(expectedBalance, actualBalance);
 
-        customerJohn.logout();
-        assertFalse(customerJohn.getLoggedIn());
+        customerTest.logout();
+        assertFalse(customerTest.getLoggedIn());
 
-        customerJohn.deposit(20);
+        customerTest.deposit(20);
         expectedBalance = 22;
-        actualBalance = customerJohn.getBalance();
+        actualBalance = customerTest.getBalance();
         assertEquals(expectedBalance, actualBalance);
 
-        customerJohn.buy(musicTitle2);
+        customerTest.buy(musicTitleTest2);
         int expectedPurchaseListSize = 1; // still 1
-        int actualPurchaseListSize = customerJohn.getTitlesBought().size();
+        int actualPurchaseListSize = customerTest.getTitlesBought().size();
 
         assertEquals(expectedPurchaseListSize, actualPurchaseListSize);
     }
 
-    // customerJohn enters wrong password three times, admin tries to reset the
+    // customerTest enters wrong password three times, admin tries to reset the
     // password without logging in
     @Test
     public void test16() {
-        customerJohn.login("cOrn");
-        assertFalse(customerJohn.getLoggedIn());
+        customerTest.login("cOrn");
+        assertFalse(customerTest.getLoggedIn());
 
-        assertEquals(1, customerJohn.getFailedLoginAttempts());
+        assertEquals(1, customerTest.getFailedLoginAttempts());
 
-        customerJohn.login("cOrrn");
-        assertFalse(customerJohn.getLoggedIn());
+        customerTest.login("cOrrn");
+        assertFalse(customerTest.getLoggedIn());
 
-        assertEquals(2, customerJohn.getFailedLoginAttempts());
+        assertEquals(2, customerTest.getFailedLoginAttempts());
 
-        customerJohn.login("c0rn");
-        assertFalse(customerJohn.getLoggedIn());
+        customerTest.login("c0rn");
+        assertFalse(customerTest.getLoggedIn());
 
-        assertEquals(3, customerJohn.getFailedLoginAttempts());
+        assertEquals(3, customerTest.getFailedLoginAttempts());
 
-        root.resetAccount(customerJohn, "seed");
+        root.resetAccount(customerTest, "seed");
         String expectedPassword = "corn";
-        assertTrue(customerJohn.checkPassword(expectedPassword));
+        assertTrue(customerTest.checkPassword(expectedPassword));
 
         int expectedFailedLoginAttempts = 3;
-        int actualFailLoginAttempts = customerJohn.getFailedLoginAttempts();
+        int actualFailLoginAttempts = customerTest.getFailedLoginAttempts();
         assertEquals(expectedFailedLoginAttempts, actualFailLoginAttempts);
     }
 
-    // customerJohn enters wrong password three times, admin manages to log in successfully, and
+    // customerTest enters wrong password three times, admin manages to log in successfully, and
     // resets customer John' account successfully.
     @Test
     public void test17() {
-        customerJohn.login("cOrn");
-        assertFalse(customerJohn.getLoggedIn());
+        customerTest.login("cOrn");
+        assertFalse(customerTest.getLoggedIn());
 
-        assertEquals(1, customerJohn.getFailedLoginAttempts());
+        assertEquals(1, customerTest.getFailedLoginAttempts());
 
-        customerJohn.login("cOrrn");
-        assertFalse(customerJohn.getLoggedIn());
+        customerTest.login("cOrrn");
+        assertFalse(customerTest.getLoggedIn());
 
-        assertEquals(2, customerJohn.getFailedLoginAttempts());
+        assertEquals(2, customerTest.getFailedLoginAttempts());
 
-        customerJohn.login("c0rn");
-        assertFalse(customerJohn.getLoggedIn());
+        customerTest.login("c0rn");
+        assertFalse(customerTest.getLoggedIn());
 
-        assertEquals(3, customerJohn.getFailedLoginAttempts());
+        assertEquals(3, customerTest.getFailedLoginAttempts());
 
         root.login("rootpasssword");
         assertFalse(root.getLoggedIn());
@@ -274,46 +304,46 @@ public class AccountTests {
         root.login("rootpassword");
         assertTrue(root.getLoggedIn());
 
-        root.addAccount(customerJohn);
+        root.addAccount(customerTest);
         String expectedAccountName = "John";
         String actualAccountName = root.getAccounts().get(0).getName();
         assertEquals(expectedAccountName, actualAccountName);
         assertTrue(!root.getAccounts().isEmpty());
 
-        root.resetAccount(customerJohn, "seed");
+        root.resetAccount(customerTest, "seed");
         System.out.println(root);
         String expectedPassword = "seed";
-        assertTrue(customerJohn.checkPassword(expectedPassword));
+        assertTrue(customerTest.checkPassword(expectedPassword));
 
         int expectedFailedLoginAttempts = 0;
-        int actualFailLoginAttempts = customerJohn.getFailedLoginAttempts();
+        int actualFailLoginAttempts = customerTest.getFailedLoginAttempts();
         assertEquals(expectedFailedLoginAttempts, actualFailLoginAttempts);
 
-        customerJohn.login("seed");
-        //assertTrue(customerJohn.getLoggedIn());
+        customerTest.login("seed");
+        //assertTrue(customerTest.getLoggedIn());
 
-        customerJohn.deposit(100);
-        customerJohn.buy(musicTitle1);
-        customerJohn.buy(musicTitle2);
-        customerJohn.buy(musicTitle3);
+        customerTest.deposit(100);
+        customerTest.buy(musicTitleTest1);
+        customerTest.buy(musicTitleTest2);
+        customerTest.buy(musicTitleTest3);
 
         int expectedPurchaseListSize = 3;
-        int actualPurchaseListSize = customerJohn.getTitlesBought().size();
+        int actualPurchaseListSize = customerTest.getTitlesBought().size();
         assertEquals(expectedPurchaseListSize, actualPurchaseListSize);
 
         String expectedTitle = "Beethoven: Symphonies Nos. 5 and 7";
         String expectedArtist = "Ludwig van Beethoven";
         int expectedPrice = 23;
 
-        String actualTitle = customerJohn.getTitlesBought().get(2).getTitle();
-        String actualArtist = customerJohn.getTitlesBought().get(2).getArtist();
-        int actualPrice = customerJohn.getTitlesBought().get(2).getPrice();
+        String actualTitle = customerTest.getTitlesBought().get(2).getTitle();
+        String actualArtist = customerTest.getTitlesBought().get(2).getArtist();
+        int actualPrice = customerTest.getTitlesBought().get(2).getPrice();
         assertEquals(expectedTitle, actualTitle);
         assertEquals(expectedArtist, actualArtist);
         assertEquals(expectedPrice, actualPrice);
 
         int expectedBalance = 40;
-        int actualBalance = customerJohn.getBalance();
+        int actualBalance = customerTest.getBalance();
         assertEquals(expectedBalance, actualBalance);
     }
 
