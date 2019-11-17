@@ -13,7 +13,7 @@ import org.junit.jupiter.api.TestInfo;
 /**
  * In Self-Testing, the code should be tested against three different types, normal cases, boundary cases, and illegal cases.
  * <p>
- * This class contains    tests to test all the functions in class MusicTitle, AccountStandard and AccountAdministrator.
+ * This class contains 7 tests to test all the functions in class MusicTitle, AccountStandard and AccountAdministrator.
  * @author Zetian Qin zxq876
  * @version 2030-11-15 14:06:29
  */
