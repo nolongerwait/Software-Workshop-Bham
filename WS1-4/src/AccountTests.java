@@ -165,7 +165,7 @@ public class AccountTests {
         int actualPrice = customerTest.getTitlesBought().get(0).getPrice();
         assertEquals(expectedPrice, actualPrice);
 
-        int expectedBalance = 2;
+        int expectedBalance = 5;
         int actualBalance = customerTest.getBalance();
         assertEquals(expectedBalance, actualBalance);
 
@@ -174,7 +174,7 @@ public class AccountTests {
         assertFalse(customerTest.getLoggedIn());
 
         customerTest.deposit(20);
-        expectedBalance = 22;
+        expectedBalance = 25;
         actualBalance = customerTest.getBalance();
         assertEquals(expectedBalance, actualBalance);
 
@@ -231,7 +231,7 @@ public class AccountTests {
 
     @Test
     @DisplayName("Test for Administrator to reset Administrator Acccount password")
-    public void test15() {
+    public void test7() {
         Account AdminTest = new AccountAdministrator("AdminTest", "Mr", "AdminTest@Test.com", "abc123zxc");
 
         //Administrator Account failed to login three times.
