@@ -15,7 +15,7 @@ import org.junit.jupiter.api.TestInfo;
  * <p>
  * This class contains 7 tests to test all the functions in class MusicTitle, AccountStandard and AccountAdministrator.
  * @author Zetian Qin zxq876
- * @version 2030-11-15 14:06:29
+ * @version 2019-11-17 01:59:20
  */
 public class AccountTests {
 
