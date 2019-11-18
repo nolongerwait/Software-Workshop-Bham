@@ -34,7 +34,12 @@ public class AccountAdministrator extends Account implements AccountAdministrato
      * @param customer The new account to be added to the list of accounts the administrator looks after.
      */
     public void addAccount(Account account) {
-        this.accounts.add(account);
+        if(this.getLoggedIn()) {
+            this.accounts.add(account);
+        }
+        else {
+            System.out.println("You are not logged in!");
+        }
     }
 
     /**
