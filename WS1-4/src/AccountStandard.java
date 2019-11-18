@@ -36,8 +36,8 @@ public class AccountStandard extends Account implements AccountStandardInterface
     }
 
     /**
-     *  Method for a user to log in to their account by providing a password. It is first checked whether the account is still active (that is, not too many failed login attempts were made in the past) and secondly whether the password provided is correct. In case of a correct login the number of login attempts is reset to 0, else increased by 1.
-     *  @param password The password provided for the login; this is to be compared to the password stored on the system.
+     * Method for a user to log in to their account by providing a password. It is first checked whether the account is still active (that is, not too many failed login attempts were made in the past) and secondly whether the password provided is correct. In case of a correct login the number of login attempts is reset to 0, else increased by 1.
+     * @param password The password provided for the login; this is to be compared to the password stored on the system.
      */
     public void login(String password) {
         if(this.failedLoginAttempts < MAXIMAL_LOGIN_ATTEMPTS) {
@@ -77,8 +77,8 @@ public class AccountStandard extends Account implements AccountStandardInterface
     }
 
     /**
-     *  Setter for the balance.
-     *  @param balance The new balance of the account.
+     * Setter for the balance.
+     * @param balance The new balance of the account.
      */
     public void setBalance(int balance) {
         this.balance = balance;
@@ -93,8 +93,8 @@ public class AccountStandard extends Account implements AccountStandardInterface
     }
 
     /**
-     *  Setter for the failed login attempts.
-     *  @param failedLoginAttempts The new number of failed login attempts.
+     * Setter for the failed login attempts.
+     * @param failedLoginAttempts The new number of failed login attempts.
      */
     public void setFailedLoginAttempts(int failedLoginAttempts) {
         this.failedLoginAttempts = failedLoginAttempts;
@@ -127,7 +127,11 @@ public class AccountStandard extends Account implements AccountStandardInterface
      */
     public String toString() {
         if(this.getLoggedIn()) {
-            return "AccountStandard{\n" + this.getSalutation() + " " + this.getName() + ", \n You are logged in." + "\n}";
+            String musicBought = " You have bought the following list of music:\n";
+            for(MusicTitle i:this.titlesBought) {
+                musicBought += i.getTitle() + " " + i.getArtist() + " GBP" + i.getPrice() + "\n";
+            }
+            return "AccountStandard{\n" + this.getSalutation() + " " + this.getName() + ", \n You are logged in.\n" + " Your balance: " + this.getBalance() + "\n" + musicBought + "}\n";
         }
         else {
             return "No user log in!";

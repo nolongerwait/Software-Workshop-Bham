@@ -169,6 +169,8 @@ public class AccountTests {
         int actualBalance = customerTest.getBalance();
         assertEquals(expectedBalance, actualBalance);
 
+        System.out.print(customerTest);
+
         //Logout, add money to balance, then try to buy music but failed.
         customerTest.logout();
         assertFalse(customerTest.getLoggedIn());
@@ -181,8 +183,9 @@ public class AccountTests {
         customerTest.buy(musicTitleTest2);//No login, failed.
         int expectedPurchaseListSize = 1;
         int actualPurchaseListSize = customerTest.getTitlesBought().size();
-
         assertEquals(expectedPurchaseListSize, actualPurchaseListSize);
+
+        System.out.print(customerTest);
     }
 
     @Test
