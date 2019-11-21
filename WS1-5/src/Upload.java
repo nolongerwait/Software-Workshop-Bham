@@ -39,15 +39,7 @@ public class Upload extends Application{
         double upIconBigX = 45;
         double upIconSmallY = 30;
         double upIconBigY = 100;
-        upIcon.getPoints().addAll(new Double[] {
-                0.0, 0.0,
-                -upIconBigX, upIconSmallY,
-                -upIconSmallX, upIconSmallY,
-                -upIconSmallX, upIconBigY,
-                upIconSmallX, upIconBigY,
-                upIconSmallX, upIconSmallY,
-                upIconBigX, upIconSmallY
-        });
+        upIcon.getPoints().addAll(new Double[] {0.0, 0.0, -upIconBigX, upIconSmallY, -upIconSmallX, upIconSmallY, -upIconSmallX, upIconBigY,upIconSmallX, upIconBigY, upIconSmallX, upIconSmallY, upIconBigX, upIconSmallY});
 
         for(int i = 0; i < upIcon.getPoints().size(); i++) {
             if (i % 2 == 0) {
@@ -67,19 +59,7 @@ public class Upload extends Application{
         double downIconBigY = 80;
         double downIconSmallY = 20;
 
-        downIcon.getPoints().addAll(new Double[] {
-                0.0, 0.0,
-                -downIconSmallX, 0.0,
-                -downIconSmallX, -downIconBigY,
-                -downIconBigX, -downIconBigY,
-                -downIconBigX, downIconSmallY,
-                downIconBigX, downIconSmallY,
-                downIconBigX, -downIconBigY,
-                downIconSmallX, -downIconBigY,
-                downIconSmallX, 0.0
-
-
-        });
+        downIcon.getPoints().addAll(new Double[] {0.0, 0.0, -downIconSmallX, 0.0, -downIconSmallX, -downIconBigY, -downIconBigX, -downIconBigY, -downIconBigX, downIconSmallY, downIconBigX, downIconSmallY, downIconBigX, -downIconBigY, downIconSmallX, -downIconBigY, downIconSmallX, 0.0});
 
         for(int i = 0; i < downIcon.getPoints().size(); i++) {
             if (i % 2 == 0) {
