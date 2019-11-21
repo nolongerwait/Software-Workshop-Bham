@@ -7,8 +7,8 @@ import javafx.stage.Stage;
  * This is the file of the WS1-5 Ex1.
  * The class is to displays an upload icon using the javafx.scene.shape.Polygon.
  * The fellow solution is to use two polygon to construct the icon, one is the upper icon, another is the downer icon.
- * @author Tao Ling (TXL951 or 2056746)
- * @version 2019-11-19
+ * @author Zetian Qin zxq876
+ * @version 2019-11-21 15:19:27
  **/
 
 public class Upload extends Application{
