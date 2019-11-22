@@ -4,20 +4,18 @@ import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
 
 /**
- * This is the file of the WS1-5 Ex1.
- * The class is to displays an upload icon using the javafx.scene.shape.Polygon.
- * The fellow solution is to use two polygon to construct the icon, one is the upper icon, another is the downer icon.
+ * This class draw a upload icon and display it.
  * @author Zetian Qin zxq876
  * @version 2019-11-21 15:19:27
  **/
 
-public class Upload extends Application{
+public class Upload extends Application {
 
+    @Override
     /**
      * The main structure of the javafx.
      * @param stage the main display component of the javaFX.
      */
-    @Override
     public void start(Stage stage) throws Exception {
         Group root = new Group();
 
@@ -35,9 +33,9 @@ public class Upload extends Application{
         double offsetXUpIcon = scene.getWidth() / 2;
         double offsetYUpIcon = 40.0;
 
-        double upIconSmallX = 20;
-        double upIconBigX = 45;
-        double upIconSmallY = 30;
+        double upIconSmallX = 10;
+        double upIconBigX = 30;
+        double upIconSmallY = 25;
         double upIconBigY = 100;
         upIcon.getPoints().addAll(new Double[] {0.0, 0.0, -upIconBigX, upIconSmallY, -upIconSmallX, upIconSmallY, -upIconSmallX, upIconBigY,upIconSmallX, upIconBigY, upIconSmallX, upIconSmallY, upIconBigX, upIconSmallY});
 
