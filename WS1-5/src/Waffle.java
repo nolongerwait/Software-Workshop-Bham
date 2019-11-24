@@ -44,5 +44,7 @@ public class Waffle extends Application {
                 numberOfEach = MAX_NUMBER_OF_SQUARE - sumOfEachItem;
             }
         }
+
+        //
     }
 }
