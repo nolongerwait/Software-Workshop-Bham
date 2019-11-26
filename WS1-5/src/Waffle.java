@@ -29,7 +29,7 @@ public class Waffle extends Application {
         new Expenditure("Pencils", 3000)
     };
     private int maximum = 8; // !maximum must less than or same as the length of expenditures!
-    
+
     private static final int MAX_NUMBER_OF_SQUARE  = 100;
     private static final double SCALING_RATIO_LEGEND = 0.6;
 
@@ -56,6 +56,8 @@ public class Waffle extends Application {
         this.maximum = maximum;
     }
     */
+
+    // --- Compute the data which is needed in Waffle Chart - Below ---
 
     /**
      * This method caculate the x coordinate of all the 100 squares.
@@ -127,13 +129,17 @@ public class Waffle extends Application {
         return numberOfEachItem;
     }
 
+    // --- Compute the data which is needed in Waffle Chart - Above ---
+
+    // --- Draw the graphic of Waffle Chart ----------------- Below ---
+
     /**
      * This method draws the little square in Waffle Chart.
-     * @param root 
+     * @param root The group to which the squares are to be added
      * @param xCoordinate The x coordinate of the square, as double.
      * @param yCoordinate The y coordinate of the square, as double.
      * @param squareWidth The width of square, as double.
-     * @param color The color of the square, as Paint.
+     * @param color The color of the square, as Color.
      */
     public void drawSquare(Group root,double xCoordinate, double yCoordinate, double squareWidth, Color color) {
         Rectangle square = new Rectangle(xCoordinate, yCoordinate, squareWidth, squareWidth);
@@ -143,7 +149,7 @@ public class Waffle extends Application {
 
     /**
      * This method draws the Waffle Chart whose data from numberOfEachItem ArrayList.
-     * @param root
+     * @param root The group to which the Waffle Chart is to be added
      * @param squareWidth The width of square, as double.
      * @param gapOfEachSquare The gap length between squares, as double.
      * @param xCoordinateOfEachSquare The x coordinate of 100 squares
@@ -160,11 +166,15 @@ public class Waffle extends Application {
         }
     }
 
+    // --- Draw the graphic of Waffle Chart ----------------- Above ---
+
+    // --- Compute the data of Legend area ------------------ Below ---
+
     /**
      * This method computes the X coordinate of the Legned.
      * @param squareWidth The width of square, as double.
      * @param gapOfEachSquare The gap length between squares, as double.
-     * @return
+     * @return The X coordinate of the Legend icon.
      */
     public double xLegendCoordinate(double squareWidth, double gapOfEachSquare) {
         return (squareWidth + gapOfEachSquare) * 9 + squareWidth + 40; // 40 is the gap between Waffle Chart and Legend.
@@ -200,35 +210,38 @@ public class Waffle extends Application {
         return yLegendCorrdinates;
     }
 
+    // --- Compute the data of Legend area ------------------ Above ---
+
+    // --- Draw the Legend area ----------------------------- Below ---
+
     /**
-     * 
-     * @param root
-     * @param xLegendCoordinate
-     * @param yLegendCoordinate
-     * @param xLegendTextCoordinate
-     * @param squareWidth
-     * @param title
-     * @param color
+     * This method draws the Legend icon and Legend text.
+     * @param root The group to which the Legend Line(icon and text) is to be added
+     * @param xLegendCoordinate The X coordinate of the Legend icon, as double.
+     * @param yLegendCoordinate The Y coordinate of the Legend icon, as double.
+     * @param xLegendTextCoordinate The X coordinate of the Legend Text, as double.
+     * @param squareWidth The width of square, as double.
+     * @param title The title of Each Item in Legend.
+     * @param color The color of the square, as Color.
      */
     public void drawLegendLine(Group root, double xLegendCoordinate, double yLegendCoordinate, double xLegendTextCoordinate, double squareWidth, String title, Color color) {
+        // Draws the square of Each Item in Legend icon.
         Rectangle square = new Rectangle(xLegendCoordinate, yLegendCoordinate, squareWidth * SCALING_RATIO_LEGEND, squareWidth * SCALING_RATIO_LEGEND);
         square.setFill(color);
         root.getChildren().add(square);
 
+        // Draws the Text of Each Item behind the Legend icon. (Note the difference between the reference points of the graphics and text)
         Text titleOfEachItem = new Text(xLegendTextCoordinate, yLegendCoordinate + squareWidth * SCALING_RATIO_LEGEND, title);
-        System.out.println(title);
-        System.out.println(xLegendTextCoordinate);
-        System.out.println(yLegendCoordinate);
         titleOfEachItem.setFont(Font.font(squareWidth * SCALING_RATIO_LEGEND));
         root.getChildren().add(titleOfEachItem);
     }
 
     /**
-     * 
-     * @param root
-     * @param xLegendCoordinate
-     * @param yLegendCorrdinates
-     * @param squareWidth
+     * This method draws the Legend area by using drawLegendLine() method.
+     * @param root The group to which the Legend is to be added
+     * @param xLegendCoordinate  The X coordinate of the Legend icon, as double.
+     * @param yLegendCorrdinates The Y coordinates of the Legend icon, as double[].
+     * @param squareWidth The width of square, as double.
      */
     public void drawLegend(Group root, double xLegendCoordinate, double[] yLegendCorrdinates, double squareWidth) {
         for(int i = 0; i < this.maximum; i++) {
@@ -243,6 +256,8 @@ public class Waffle extends Application {
             drawLegendLine(root, xLegendCoordinate, yLegendCorrdinates[i], xLegendTextCoordinate, squareWidth, title, this.color[i]);
         }
     }
+
+    // --- Draw the Legend area ----------------------------- Above ---
 
     @Override
     /**
