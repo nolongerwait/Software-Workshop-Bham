@@ -6,6 +6,8 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -27,7 +29,10 @@ public class Waffle extends Application {
         new Expenditure("Pencils", 3000)
     };
     private int maximum = 8; // !maximum must less than or same as the length of expenditures!
+    
     private static final int MAX_NUMBER_OF_SQUARE  = 100;
+    private static final double SCALING_RATIO_LEGEND = 0.6;
+
     private final Color[] color = new Color[] {
         Color.web("#1C1C1C"),
         Color.web("#DC9FB4"),
@@ -59,8 +64,9 @@ public class Waffle extends Application {
      * @return The x coordinate of 100 squares.
      */
     public double[] xCoordinateOfEachSquare(double squareWidth, double gapOfSquare) {
-        double[] xCoordinateOfEachSquare = new double[100];
+        double[] xCoordinateOfEachSquare = new double[MAX_NUMBER_OF_SQUARE];
         double xCoordinate = 0;
+
         for(int i = 0; i < 10; i++) {
             xCoordinate = (squareWidth + gapOfSquare) * i;
             for(int j = 0; j < 10; j++){
@@ -77,8 +83,9 @@ public class Waffle extends Application {
      * @return The y coordinate of 100 squares
      */
     public double[] yCoordinateOfEachSquare(double squareWidth, double gapOfSquare) {
-        double[] yCoordinateOfEachSquare = new double[100];
+        double[] yCoordinateOfEachSquare = new double[MAX_NUMBER_OF_SQUARE];
         double yCoordinate = 0;
+
         for(int i = 0; i < 10; i++) {
             yCoordinate = (squareWidth + gapOfSquare) * i;
             for(int j = 0; j < 10; j++){
@@ -93,6 +100,8 @@ public class Waffle extends Application {
      * @return the number of square of each item in expenditure, as ArrayList<Integer>.
      */
     public ArrayList<Integer> caculateNumberOfEachItem() {
+        ArrayList<Integer> numberOfEachItem = new ArrayList<Integer>(); // Stores the number of square of each item in expenditure
+
         // Sort Array expenditures
         Arrays.sort(this.expenditures, (Expenditure exp1, Expenditure exp2) -> exp2.getValue() - exp1.getValue());
 
@@ -102,8 +111,7 @@ public class Waffle extends Application {
             sum += itor.getValue();
         }
 
-        ArrayList<Integer> numberOfEachItem = new ArrayList<Integer>();
-        int sumOfEachItem = 0; // Store the sum of square of each item to define the square number of last item.
+        int sumOfEachItem = 0; // Stores the sum of square of each item to define the square number of last item.
 
         for(int i = 0; i < this.maximum; i++) {
             int numberOfEach = 0;
@@ -121,6 +129,7 @@ public class Waffle extends Application {
 
     /**
      * This method draws the little square in Waffle Chart.
+     * @param root 
      * @param xCoordinate The x coordinate of the square, as double.
      * @param yCoordinate The y coordinate of the square, as double.
      * @param squareWidth The width of square, as double.
@@ -139,7 +148,7 @@ public class Waffle extends Application {
      * @param gapOfEachSquare The gap length between squares, as double.
      * @param xCoordinateOfEachSquare The x coordinate of 100 squares
      * @param yCoordinateOfEachSquare The y coordinate of 100 squares
-     * @param numberOfEachItem
+     * @param numberOfEachItem The number of square of each item in expenditure, as ArrayList<Integer>.
      */
     public void drawWaffleChart(Group root, double squareWidth, double gapOfEachSquare, double[] xCoordinateOfEachSquare, double[] yCoordinateOfEachSquare, ArrayList<Integer> numberOfEachItem) {
         int countSquare = 0; // Count the number of square which has been drawn.
@@ -151,9 +160,93 @@ public class Waffle extends Application {
         }
     }
 
+    /**
+     * This method computes the X coordinate of the Legned.
+     * @param squareWidth The width of square, as double.
+     * @param gapOfEachSquare The gap length between squares, as double.
+     * @return
+     */
+    public double xLegendCoordinate(double squareWidth, double gapOfEachSquare) {
+        return (squareWidth + gapOfEachSquare) * 9 + squareWidth + 40; // 40 is the gap between Waffle Chart and Legend.
+    }
+
+    /**
+     * This method computes the X coordinate of the Legend Text.
+     * @param xLegendCoordinate The X coordinate of the Legned, as double.
+     * @param squareWidth The width of square, as double.
+     * @return The X coordinate of the Legend Text.
+     */
+    public double xLegendTextCoordinate(double xLegendCoordinate, double squareWidth) {
+        return xLegendCoordinate + squareWidth * SCALING_RATIO_LEGEND  + 10; // 10 is the gap between the Legend icon and text.
+    }
+
+    /**
+     * This method computes the Y coordinates of each item in Legend.
+     * @param squareWidth The width of square, as double.
+     * @param gapOfEachSquare The gap length between squares, as double.
+     * @return The Y coordinates of each item in Legend, as double[].
+     */
+    public double[] yLegendCorrdinates(double squareWidth, double gapOfEachSquare) {
+        double[] yLegendCorrdinates = new double[this.maximum]; // Stores the coordinate of the legend of each item.
+
+        // Compute the coordinate
+        // By default, the bottom of the Legend is consistent with the Waffle Chart.
+        double bottom = (squareWidth + gapOfEachSquare) * 9 + squareWidth; // the Y coordinate of the bottom of the Waffle Chart.
+        double squareWidthOfLegend = squareWidth * SCALING_RATIO_LEGEND;  // the width of squares in Legend.
+        for(int i = 0; i < this.maximum; i++) {
+            double yLegendCoordinate = bottom - squareWidthOfLegend - (squareWidthOfLegend + gapOfEachSquare) * (this.maximum - 1 - i);
+            yLegendCorrdinates[i] = yLegendCoordinate;
+        }
+        return yLegendCorrdinates;
+    }
+
+    /**
+     * 
+     * @param root
+     * @param xLegendCoordinate
+     * @param yLegendCoordinate
+     * @param xLegendTextCoordinate
+     * @param squareWidth
+     * @param title
+     * @param color
+     */
+    public void drawLegendLine(Group root, double xLegendCoordinate, double yLegendCoordinate, double xLegendTextCoordinate, double squareWidth, String title, Color color) {
+        Rectangle square = new Rectangle(xLegendCoordinate, yLegendCoordinate, squareWidth * SCALING_RATIO_LEGEND, squareWidth * SCALING_RATIO_LEGEND);
+        square.setFill(color);
+        root.getChildren().add(square);
+
+        Text titleOfEachItem = new Text(xLegendTextCoordinate, yLegendCoordinate + squareWidth * SCALING_RATIO_LEGEND, title);
+        System.out.println(title);
+        System.out.println(xLegendTextCoordinate);
+        System.out.println(yLegendCoordinate);
+        titleOfEachItem.setFont(Font.font(squareWidth * SCALING_RATIO_LEGEND));
+        root.getChildren().add(titleOfEachItem);
+    }
+
+    /**
+     * 
+     * @param root
+     * @param xLegendCoordinate
+     * @param yLegendCorrdinates
+     * @param squareWidth
+     */
+    public void drawLegend(Group root, double xLegendCoordinate, double[] yLegendCorrdinates, double squareWidth) {
+        for(int i = 0; i < this.maximum; i++) {
+            String title = "";
+            if(i == this.maximum - 1) {
+                title = "Others";
+            }
+            else {
+                title = this.expenditures[i].getDescription();
+            }
+            double xLegendTextCoordinate = xLegendTextCoordinate(xLegendCoordinate, squareWidth);
+            drawLegendLine(root, xLegendCoordinate, yLegendCorrdinates[i], xLegendTextCoordinate, squareWidth, title, this.color[i]);
+        }
+    }
+
     @Override
     /**
-     * @param arg0 The window to be displayed.
+     * @param stage The window to be displayed.
      */
     public void start(Stage stage) throws Exception {
         double squareWidth = 30;
@@ -165,6 +258,11 @@ public class Waffle extends Application {
         Group root = new Group();
 
         drawWaffleChart(root, squareWidth, gapOfEachSquare, xCoordinateOfEachSquare, yCoordinateOfEachSquare, numberOfEachItem);
+        
+        double xLegendCoordinate = xLegendCoordinate(squareWidth, gapOfEachSquare);
+        double[] yLegendCorrdinates = yLegendCorrdinates(squareWidth, gapOfEachSquare);
+
+        drawLegend(root, xLegendCoordinate, yLegendCorrdinates, squareWidth);
 
         // The scene consists of just one group.
         Scene scene = new Scene(root);
