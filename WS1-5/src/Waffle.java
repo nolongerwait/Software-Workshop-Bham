@@ -33,17 +33,38 @@ public class Waffle extends Application {
     private static final int MAX_NUMBER_OF_SQUARE  = 100;
     private static final double SCALING_RATIO_LEGEND = 0.6;
 
+    // This is a default chart color scheme with twelve colors.
     private final Color[] color = new Color[] {
-        Color.web("#1C1C1C"),
-        Color.web("#DC9FB4"),
-        Color.web("#947A6D"),
-        Color.web("#F7C242"),
-        Color.web("#00896C"),
-        Color.web("#86C166"),
-        Color.web("#A8497A"),
-        Color.web("#77428D"),
-        Color.web("#0D5661"),
+        Color.web("#00a8e1"),
+        Color.web("#99cc00"),
+        Color.web("#e30039"),
+        Color.web("#fcd300"),
+        Color.web("#800080"),
+        Color.web("#00994e"),
+        Color.web("#ff6600"),
+        Color.web("#808000"),
+        Color.web("#db00c2"),
+        Color.web("#008080"),
+        Color.web("#0000ff"),
+        Color.web("#c8cc00")
     };
+
+    // I have tried writing a method to create gradient colors. But the effect was not satisfactory.
+    /*
+    public void createColors() {
+        Color[] colors = new Color[this.maximum];
+        int red = 0;
+        int green = 0;
+        int blue = 0;
+        for(int i = 0; i < this.maximum; i++) {
+            colors[i] = Color.rgb(red, green, blue);
+            red += 10;
+            green += 25;
+            blue += 10;
+        }
+        this.color = colors;
+    }
+    */
 
     /**
      * Standard constructor of the abstract class Waffle.
@@ -253,7 +274,7 @@ public class Waffle extends Application {
                 title = this.expenditures[i].getDescription();
             }
             double xLegendTextCoordinate = xLegendTextCoordinate(xLegendCoordinate, squareWidth);
-            drawLegendLine(root, xLegendCoordinate, yLegendCorrdinates[i], xLegendTextCoordinate, squareWidth, title, this.color[i]);
+            drawLegendLine(root, xLegendCoordinate, yLegendCorrdinates[i], xLegendTextCoordinate, squareWidth, title, (this.color)[i]);
         }
     }
 
@@ -266,6 +287,7 @@ public class Waffle extends Application {
     public void start(Stage stage) throws Exception {
         double squareWidth = 30;
         double gapOfEachSquare = 5;
+
         double[] xCoordinateOfEachSquare = xCoordinateOfEachSquare(squareWidth, gapOfEachSquare);
         double[] yCoordinateOfEachSquare = yCoordinateOfEachSquare(squareWidth, gapOfEachSquare);
         ArrayList<Integer> numberOfEachItem = caculateNumberOfEachItem();
