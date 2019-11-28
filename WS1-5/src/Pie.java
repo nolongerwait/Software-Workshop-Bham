@@ -169,20 +169,32 @@ public class Pie extends Application {
      * @param textsWidth The Group of text width of Each Item in Pie, as ArrayList<Double>.
      * @return The X and Y coordinates of the Start Point of Text of Each Item in Pie Chart, as double[].
      */
-    public double[] caculateTextsCoordinate(double[] circleCentre, double radiusPie, double gapTextPie, ArrayList<Double> angleOfTexts, ArrayList<Double> textsWidth) {
+    public double[] caculateTextsCoordinate(double[] circleCentre, double radiusPie, double gapTextPie, ArrayList<Text> textsGroup, ArrayList<Double> angleOfTexts, ArrayList<Double> textsWidth) {
         double[] textsCoordinate = new double[2 * this.maximum];
         for(int i = 0; i < this.maximum; i++) {
-            if(angleOfTexts.get(i) < 80 || angleOfTexts.get(i) > 280) {
+            if(angleOfTexts.get(i) < 80) {
                 textsCoordinate[2 * i] = circleCentre[0] + (radiusPie + gapTextPie) * Math.cos(angleOfTexts.get(i) * Math.PI / 180);
                 textsCoordinate[2 * i + 1] = circleCentre[1] - (radiusPie + gapTextPie) * Math.sin(angleOfTexts.get(i) * Math.PI / 180); 
             }
-            else if(angleOfTexts.get(i) > 100 && angleOfTexts.get(i) < 260) {
+            else if(angleOfTexts.get(i) >= 80 && angleOfTexts.get(i) <= 100) {
+                textsCoordinate[2 * i] = circleCentre[0] + (radiusPie + gapTextPie) * Math.cos(angleOfTexts.get(i) * Math.PI / 180) - (textsWidth.get(i) / 2);
+                textsCoordinate[2 * i + 1] = circleCentre[1] - (radiusPie + gapTextPie) * Math.sin(angleOfTexts.get(i) * Math.PI / 180); 
+            }
+            else if(angleOfTexts.get(i) > 100 && angleOfTexts.get(i) <= 180) {
                 textsCoordinate[2 * i] = circleCentre[0] + (radiusPie + gapTextPie) * Math.cos(angleOfTexts.get(i) * Math.PI / 180) - textsWidth.get(i);
                 textsCoordinate[2 * i + 1] = circleCentre[1] - (radiusPie + gapTextPie) * Math.sin(angleOfTexts.get(i) * Math.PI / 180); 
             }
+            else if(angleOfTexts.get(i) > 180 && angleOfTexts.get(i) < 260) {
+                textsCoordinate[2 * i] = circleCentre[0] + (radiusPie + gapTextPie) * Math.cos(angleOfTexts.get(i) * Math.PI / 180) - textsWidth.get(i);
+                textsCoordinate[2 * i + 1] = circleCentre[1] - (radiusPie + gapTextPie) * Math.sin(angleOfTexts.get(i) * Math.PI / 180) + + textsGroup.get(i).getLayoutBounds().getHeight() / 2;
+            }
+            else if(angleOfTexts.get(i) > 280) {
+                textsCoordinate[2 * i] = circleCentre[0] + (radiusPie + gapTextPie) * Math.cos(angleOfTexts.get(i) * Math.PI / 180);
+                textsCoordinate[2 * i + 1] = circleCentre[1] - (radiusPie + gapTextPie) * Math.sin(angleOfTexts.get(i) * Math.PI / 180) + textsGroup.get(i).getLayoutBounds().getHeight() / 2; 
+            }
             else {
                 textsCoordinate[2 * i] = circleCentre[0] + (radiusPie + gapTextPie) * Math.cos(angleOfTexts.get(i) * Math.PI / 180) - (textsWidth.get(i) / 2);
-                textsCoordinate[2 * i + 1] = circleCentre[1] - (radiusPie + gapTextPie) * Math.sin(angleOfTexts.get(i) * Math.PI / 180); 
+                textsCoordinate[2 * i + 1] = circleCentre[1] - (radiusPie + gapTextPie) * Math.sin(angleOfTexts.get(i) * Math.PI / 180) + textsGroup.get(i).getLayoutBounds().getHeight() / 2; 
             }
         }
         System.out.print("\n Coordinates of Text:" + Arrays.toString(textsCoordinate));
@@ -204,7 +216,7 @@ public class Pie extends Application {
         double[] circleCentre = computeCircleCentre(radiusPie, gapTextPie, angleOfTexts, textsWidth);
         
         double[] lineEndCoordinate = caculateLineEndCoordinate(circleCentre, radiusPie, angleOfEachItem);
-        double[] textsCoordinate = caculateTextsCoordinate(circleCentre, radiusPie, gapTextPie, angleOfTexts, textsWidth);
+        double[] textsCoordinate = caculateTextsCoordinate(circleCentre, radiusPie, gapTextPie, textsGroup, angleOfTexts, textsWidth);
 
         // Draw the Circle
         Circle circle = new Circle(circleCentre[0], circleCentre[1], radiusPie, Color.WHITE);
