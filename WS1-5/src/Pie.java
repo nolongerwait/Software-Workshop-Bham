@@ -147,7 +147,7 @@ public class Pie extends Application {
      * @param circleCentre The centre coordinates of Circle, as double[2] in which the First one is X coordinate and the Last one is Y coordinate.
      * @param radiusPie The radius of Pie, as double.
      * @param angleOfEachItem The angle of each item of expenditure, as ArrayList<Double>.
-     * @return
+     * @return The X and Y coordinates of the End of Line of Each Item in Pie Chart, as double[].
      */
     public double[] caculateLineEndCoordinate(double[] circleCentre, double radiusPie, ArrayList<Double> angleOfEachItem){
         double[] lineEndCoordinate = new double[2 * this.maximum];
@@ -164,7 +164,7 @@ public class Pie extends Application {
      * This method computes the X and Y coordinates of the Start Point of Text of Each Item in Pie Chart.
      * @param circleCentre The centre coordinates of Circle, as double[2] in which the First one is X coordinate and the Last one is Y coordinate.
      * @param radiusPie The radius of Pie, as double.
-     * @param gapTextPie
+     * @param gapTextPie The gap distence between Text and Pie, as double.
      * @param angleOfTexts The angle of Each Text in Pie Chart, as ArrayList<Double>.
      * @param textsWidth The Group of text width of Each Item in Pie, as ArrayList<Double>.
      * @return The X and Y coordinates of the Start Point of Text of Each Item in Pie Chart, as double[].
@@ -189,6 +189,14 @@ public class Pie extends Application {
         return textsCoordinate;
     }
 
+    /**
+     * This method draws the Total Pie Chart with the most suitable size of Scene.
+     * @param root The group to which the Every Node is to be added, as Group.
+     * @param radiusPie The radius of Pie, as double.
+     * @param gapTextPie The gap distence between Text and Pie, as double.
+     * @param angleOfEachItem The angle of each item of expenditure, as ArrayList<Double>.
+     * @param angleOfTexts The angle of Each Text in Pie Chart, as ArrayList<Double>.
+     */
     public void drawPie(Group root, double radiusPie, double gapTextPie, ArrayList<Double> angleOfEachItem, ArrayList<Double> angleOfTexts){
         ArrayList<Text> textsGroup = new ArrayList<Text>();
         ArrayList<Double> textsWidth = new ArrayList<Double>();
