@@ -11,7 +11,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
- * The Waffle class should have 2 field variables, namely expenditures, maximum of types Expenditure[] and int.
+ * The Waffle class has 2 field variables, namely expenditures, maximum of types Expenditure[] and int.
  * @author Zetian Qin zxq876
  * @version 2019-11-25 15:50:11
  */
