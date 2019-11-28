@@ -90,8 +90,9 @@ public class DisplayFunctionArea extends Application{
             for (int i = 0; i <= n ; i++){
                 x = a + (b - a) * i / n;
                 y = f.apply(x);
-                points[2*i]   = (x - a) * X_SIZE / (b - a);
-                points[2*i+1] = (max - y) * Y_SIZE / (max - min);
+                // Changed - The actual coordinates of Points in PolyLine, not the x and y in f function.
+                points[2 * i]   = (x - a) * X_SIZE / (b - a);
+                points[2 * i + 1] = (max - y) * Y_SIZE / (max - min);
             }
             // Changed - The last two Point of the Polygon have not been added in, so I add these now.
             // Please note this, the Fisrt one must be the the Right endpoint of the X axis.
