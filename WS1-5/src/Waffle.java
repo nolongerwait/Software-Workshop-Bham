@@ -16,21 +16,31 @@ import javafx.stage.Stage;
  * @version 2019-11-25 15:50:11
  */
 public class Waffle extends Application {
-    private Expenditure[] expenditures = new Expenditure[] {
-        new Expenditure("Salaries", 11000),
-        new Expenditure("Paper", 2000),
-        new Expenditure("Rent", 5000),
-        new Expenditure("Most popular books on Java etc.",10000),
-        new Expenditure("Heating", 3000),
-        new Expenditure("Coffee/Tea", 7000),
-        new Expenditure("Biscuits", 8000),
-        new Expenditure("Travel", 18000),
-        new Expenditure("Electricity", 1000),
-        new Expenditure("Pencils", 3000)
-    };
-    private int maximum = 8; // !maximum must less than or same as the length of expenditures!
+    /**
+     * expenditures is the data of Expenditure object to be displayed. It is introduced as a global variable so that it can be used in the start method, but be defined in the main method.
+     */
+    private static Expenditure[] expenditures;
 
+    /**
+     * maximum is the maximum number of items which user would like to show in Waffle Chart. It is introduced as a global variable so that it can be used in the start method, but be defined in the main method.
+     * maximum must be less than or same as the length of expenditures!
+     */
+    private static int maximum;
+
+    /**
+     * maximum is the width of squares which user would like to show in Waffle Chart. It is introduced as a global variable so that it can be used in the start method, but be defined in the main method.
+     */
+    private static double squareWidth;
+
+    /**
+     * gapOfEachSquare is the gap between squares showed in Waffle Chart. It is introduced as a global variable so that it can be used in the start method, and it would be defined by the value of squareWidth.
+     */
+    private static double gapOfEachSquare;
+
+    // MAX_NUMBER_OF_SQUARE is the maximum number of squares in Waffle Chart.
     private static final int MAX_NUMBER_OF_SQUARE  = 100;
+
+    // SCALING_RATIO_LEGEND is the scaling ratio of square between Waffle Chart and Legend.
     private static final double SCALING_RATIO_LEGEND = 0.6;
 
     // This is a default chart color scheme with twelve colors.
@@ -126,23 +136,23 @@ public class Waffle extends Application {
         ArrayList<Integer> numberOfEachItem = new ArrayList<Integer>(); // Stores the number of square of each item in expenditure
 
         // Sort Array expenditures
-        Arrays.sort(this.expenditures, (Expenditure exp1, Expenditure exp2) -> exp2.getValue() - exp1.getValue());
+        Arrays.sort(expenditures, (Expenditure exp1, Expenditure exp2) -> exp2.getValue() - exp1.getValue());
 
         // Computer number of square of each item.
         double sum = 0; // Store the sum of the data of all kinds of Expenditure.
-        for(Expenditure itor:this.expenditures) {
+        for(Expenditure itor:expenditures) {
             sum += itor.getValue();
         }
 
         int sumOfEachItem = 0; // Stores the sum of square of each item to define the square number of last item.
 
-        for(int i = 0; i < this.maximum; i++) {
+        for(int i = 0; i < maximum; i++) {
             int numberOfEach = 0;
-            if(i == this.maximum - 1) {
+            if(i == maximum - 1) {
                 numberOfEachItem.add(MAX_NUMBER_OF_SQUARE - sumOfEachItem);
             }
             else {
-                numberOfEach = (int)Math.round((this.expenditures)[i].getValue() / sum * 100);
+                numberOfEach = (int)Math.round(expenditures[i].getValue() / sum * 100);
                 numberOfEachItem.add(numberOfEach);
             }
             sumOfEachItem += numberOfEach;
@@ -179,7 +189,7 @@ public class Waffle extends Application {
      */
     public void drawWaffleChart(Group root, double squareWidth, double gapOfEachSquare, double[] xCoordinateOfEachSquare, double[] yCoordinateOfEachSquare, ArrayList<Integer> numberOfEachItem) {
         int countSquare = 0; // Count the number of square which has been drawn.
-        for(int i = 0; i < this.maximum; i++) {
+        for(int i = 0; i < maximum; i++) {
             for(int indexOfNumberOfEachItem = 0; indexOfNumberOfEachItem < numberOfEachItem.get(i); indexOfNumberOfEachItem++) {
                 drawSquare(root, xCoordinateOfEachSquare[countSquare], yCoordinateOfEachSquare[countSquare], squareWidth, (this.color)[i]);
                 countSquare++;
@@ -218,14 +228,14 @@ public class Waffle extends Application {
      * @return The Y coordinates of each item in Legend, as double[].
      */
     public double[] yLegendCorrdinates(double squareWidth, double gapOfEachSquare) {
-        double[] yLegendCorrdinates = new double[this.maximum]; // Stores the coordinate of the legend of each item.
+        double[] yLegendCorrdinates = new double[maximum]; // Stores the coordinate of the legend of each item.
 
         // Compute the coordinate
         // By default, the bottom of the Legend is consistent with the Waffle Chart.
         double bottom = (squareWidth + gapOfEachSquare) * 9 + squareWidth; // the Y coordinate of the bottom of the Waffle Chart.
         double squareWidthOfLegend = squareWidth * SCALING_RATIO_LEGEND;  // the width of squares in Legend.
-        for(int i = 0; i < this.maximum; i++) {
-            double yLegendCoordinate = bottom - squareWidthOfLegend - (squareWidthOfLegend + gapOfEachSquare) * (this.maximum - 1 - i);
+        for(int i = 0; i < maximum; i++) {
+            double yLegendCoordinate = bottom - squareWidthOfLegend - (squareWidthOfLegend + gapOfEachSquare) * (maximum - 1 - i);
             yLegendCorrdinates[i] = yLegendCoordinate;
         }
         return yLegendCorrdinates;
@@ -265,13 +275,13 @@ public class Waffle extends Application {
      * @param squareWidth The width of square, as double.
      */
     public void drawLegend(Group root, double xLegendCoordinate, double[] yLegendCorrdinates, double squareWidth) {
-        for(int i = 0; i < this.maximum; i++) {
+        for(int i = 0; i < maximum; i++) {
             String title = "";
-            if(i == this.maximum - 1) {
-                title = "Others";
+            if(i == (maximum - 1)) {
+                title = "Other";
             }
             else {
-                title = this.expenditures[i].getDescription();
+                title = expenditures[i].getDescription();
             }
             double xLegendTextCoordinate = xLegendTextCoordinate(xLegendCoordinate, squareWidth);
             drawLegendLine(root, xLegendCoordinate, yLegendCorrdinates[i], xLegendTextCoordinate, squareWidth, title, (this.color)[i]);
@@ -285,8 +295,6 @@ public class Waffle extends Application {
      * @param stage The window to be displayed.
      */
     public void start(Stage stage) throws Exception {
-        double squareWidth = 30;
-        double gapOfEachSquare = 5;
 
         double[] xCoordinateOfEachSquare = xCoordinateOfEachSquare(squareWidth, gapOfEachSquare);
         double[] yCoordinateOfEachSquare = yCoordinateOfEachSquare(squareWidth, gapOfEachSquare);
@@ -310,13 +318,53 @@ public class Waffle extends Application {
         stage.show();
     }
 
+    // --- Set Initial Data area ----------------------------- Below ---
+
+    /**
+     * This method likes the constructor in normal class, and it sets the value of the global variables expenditures and maximum from parameter and set the global variables squareWidth with a default value.
+     * @param expendituresArgs The data of Expenditure object which would be shown as Waffle Chart.
+     * @param maximumArgs The maximum items which user would like to show in Waffle Chart.
+     * @throws IllegalArgumentException The length of Array expendituresArgs is less than the maximumArgs.
+     */
+    public static void setValues(Expenditure[] expendituresArgs, int maximumArgs) throws IllegalArgumentException {
+        if(expendituresArgs.length < maximumArgs) {
+            throw new IllegalArgumentException("The length of Array expendituresArgs must be greater than or equal to the maximumArgs");
+        }
+        else {
+            expenditures = expendituresArgs;
+            maximum = maximumArgs;
+            squareWidth = 30; // 30 is the Default value.
+            gapOfEachSquare = squareWidth * 0.2;
+        }
+    }
+
+    /**
+     * This method likes the constructor in normal class, and it sets the value of the global variables expenditures and maximum and squareWidth from parameter.
+     * @param expendituresArgs The data of Expenditure object which would be shown as Waffle Chart.
+     * @param maximumArgs The maximum items which user would like to show in Waffle Chart.
+     * @param squareWidthArgs The width of squares in Waffle Chart.
+     * @throws IllegalArgumentException The length of Array expendituresArgs is less than the maximumArgs.
+     */
+    public static void setValues(Expenditure[] expendituresArgs, int maximumArgs, double squareWidthArgs) throws IllegalArgumentException {
+        if(expendituresArgs.length < maximumArgs) {
+            throw new IllegalArgumentException("The length of Array expendituresArgs must be greater than or equal to the maximumArgs");
+        }
+        else {
+            expenditures = expendituresArgs;
+            maximum = maximumArgs;
+            squareWidth = squareWidthArgs;
+            gapOfEachSquare = squareWidth * 0.2;
+        }
+    }
+
+    // --- Set Initial Data area ----------------------------- Above ---
+
     /**
      * main method to launch the application.
      */
     public static void main(String[] args) {
-        /*
         //Data of Expenditure.
-        Expenditure[] expenditures = new Expenditure[] {
+        Expenditure[] expendituresArgs = new Expenditure[] {
             new Expenditure("Salaries", 11000),
             new Expenditure("Paper", 2000),
             new Expenditure("Rent", 5000),
@@ -328,9 +376,8 @@ public class Waffle extends Application {
             new Expenditure("Electricity", 1000),
             new Expenditure("Pencils", 3000)
         };
-        int maximum = 8;
-        Waffle display = new Waffle(expenditures, maximum);
-        */
+        int maximumArgs = 8;
+        setValues(expendituresArgs, maximumArgs);
         launch();
     }
 }

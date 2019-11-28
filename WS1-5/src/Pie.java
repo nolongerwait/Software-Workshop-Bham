@@ -17,22 +17,32 @@ import javafx.stage.Stage;
  * @version 2019-11-27 07:36:06
  */
 public class Pie extends Application {
-    private Expenditure[] expenditures = new Expenditure[] {
-        new Expenditure("Salaries", 11000),
-        new Expenditure("Paper", 2000),
-        new Expenditure("Rent", 5000),
-        new Expenditure("Most popular books on Java etc.",10000),
-        new Expenditure("Heating", 3000),
-        new Expenditure("Coffee/Tea", 7000),
-        new Expenditure("Biscuits", 8000),
-        new Expenditure("Travel", 18000),
-        new Expenditure("Electricity", 1000),
-        new Expenditure("Pencils", 3000)
-    };
-    private int maximum = 8; // !maximum must less than or same as the length of expenditures!
+    /**
+     * expenditures is the data of Expenditure object to be displayed. It is introduced as a global variable so that it can be used in the start method, but be defined in the main method.
+     */
+    private static Expenditure[] expenditures;
 
+    /**
+     * maximum is the maximum number of items which user would like to show in Pie Chart. It is introduced as a global variable so that it can be used in the start method, but be defined in the main method.
+     * maximum must be less than or same as the length of expenditures!
+     */
+    private static int maximum;
+
+    /**
+     * radiusPie is the radius of circle which user would like to show in Pie Chart. It is introduced as a global variable so that it can be used in the start method, but be defined in the main method.
+     */
+    private static double radiusPie;
+
+    /**
+     * gapOfEachSquare is the gap between Texts and Circle showed in Pie Chart. It is introduced as a global variable so that it can be used in the start method, and it would be defined by the value of radiusPie.
+     */
+    private static double gapTextPie;
+
+    // MAX_ANGLE is the maximum angle in Pie Chart.
     private static final double MAX_ANGLE = 360;
-    private static final double SCALING_RATIO_LEGEND = 0.6;
+
+    // SCALING_RATIO_FONT is the scaling ratio between Text and radius of Pie.
+    private static final double SCALING_RATIO_FONT = 0.6;
 
     /**
      * This method caculate the angle of each item in expenditure.
@@ -42,23 +52,23 @@ public class Pie extends Application {
         ArrayList<Double> angleOfEachItem = new ArrayList<Double>(); // Stores the angle of each item in expenditure
 
         // Sort Array expenditures
-        Arrays.sort(this.expenditures, (Expenditure exp1, Expenditure exp2) -> exp2.getValue() - exp1.getValue());
+        Arrays.sort(expenditures, (Expenditure exp1, Expenditure exp2) -> exp2.getValue() - exp1.getValue());
 
         // Computer angle of each item.
         double sum = 0; // Store the sum of the data of all kinds of Expenditure.
-        for(Expenditure itor:this.expenditures) {
+        for(Expenditure itor:expenditures) {
             sum += itor.getValue();
         }
 
         double sumOfEachItem = 0; // Stores the sum of angle of each item to define the angle of last item.
 
-        for(int i = 0; i < this.maximum; i++) {
+        for(int i = 0; i < maximum; i++) {
             double angleOfEach = 0;
-            if(i == this.maximum - 1) {
+            if(i == maximum - 1) {
                 angleOfEachItem.add(MAX_ANGLE - sumOfEachItem);
             }
             else {
-                angleOfEach = (this.expenditures)[i].getValue() / sum * MAX_ANGLE;
+                angleOfEach = expenditures[i].getValue() / sum * MAX_ANGLE;
                 angleOfEachItem.add(angleOfEach);
             }
             sumOfEachItem += angleOfEach;
@@ -91,16 +101,16 @@ public class Pie extends Application {
      * @param textsWidth The Group of text width of Each Item in Pie as ArrayList<Double>.
      */
     public void createTextsGroup(double radiusPie, ArrayList<Text> textsGroup, ArrayList<Double> textsWidth) {
-        for(int i = 0; i < this.maximum; i++) {
+        for(int i = 0; i < maximum; i++) {
             Text title = new Text();
-            if(i == this.maximum - 1) {
+            if(i == (maximum - 1)) {
                 title.setText("Other");
             }
             else {
-                title.setText((this.expenditures)[i].getDescription());
+                title.setText(expenditures[i].getDescription());
             }
             
-            title.setFont(Font.font(radiusPie * 0.3 * SCALING_RATIO_LEGEND));
+            title.setFont(Font.font(radiusPie * 0.3 * SCALING_RATIO_FONT));
             title.applyCss();
             textsGroup.add(title);
             double textWidth = title.getLayoutBounds().getWidth();
@@ -121,7 +131,7 @@ public class Pie extends Application {
 
         // Compute the X coordinate
         double maxWidth = 0;
-        for(int i = 0; i < this.maximum; i++) {
+        for(int i = 0; i < maximum; i++) {
             if(angleOfTexts.get(i) > 90 && angleOfTexts.get(i) < 270) {
                 double totalWidth = textsWidth.get(i) + (-(radiusPie + gapTextPie) * Math.cos(angleOfTexts.get(i) * Math.PI / 180));
                 if(totalWidth > maxWidth) {
@@ -150,9 +160,9 @@ public class Pie extends Application {
      * @return The X and Y coordinates of the End of Line of Each Item in Pie Chart, as double[].
      */
     public double[] caculateLineEndCoordinate(double[] circleCentre, double radiusPie, ArrayList<Double> angleOfEachItem){
-        double[] lineEndCoordinate = new double[2 * this.maximum];
+        double[] lineEndCoordinate = new double[2 * maximum];
         double countThisAngle = 0; // Record the angle of current Point of End of Line.
-        for(int i = 0; i < this.maximum; i++) {
+        for(int i = 0; i < maximum; i++) {
             lineEndCoordinate[2 * i] = circleCentre[0] + radiusPie * Math.cos(countThisAngle * Math.PI / 180);
             lineEndCoordinate[2 * i + 1] = circleCentre[1] - radiusPie * Math.sin(countThisAngle * Math.PI / 180);
             countThisAngle += angleOfEachItem.get(i);
@@ -170,25 +180,25 @@ public class Pie extends Application {
      * @return The X and Y coordinates of the Start Point of Text of Each Item in Pie Chart, as double[].
      */
     public double[] caculateTextsCoordinate(double[] circleCentre, double radiusPie, double gapTextPie, ArrayList<Text> textsGroup, ArrayList<Double> angleOfTexts, ArrayList<Double> textsWidth) {
-        double[] textsCoordinate = new double[2 * this.maximum];
-        for(int i = 0; i < this.maximum; i++) {
-            if(angleOfTexts.get(i) < 80) {
+        double[] textsCoordinate = new double[2 * maximum];
+        for(int i = 0; i < maximum; i++) {
+            if(angleOfTexts.get(i) < 75) {
                 textsCoordinate[2 * i] = circleCentre[0] + (radiusPie + gapTextPie) * Math.cos(angleOfTexts.get(i) * Math.PI / 180);
                 textsCoordinate[2 * i + 1] = circleCentre[1] - (radiusPie + gapTextPie) * Math.sin(angleOfTexts.get(i) * Math.PI / 180); 
             }
-            else if(angleOfTexts.get(i) >= 80 && angleOfTexts.get(i) <= 100) {
+            else if(angleOfTexts.get(i) >= 75 && angleOfTexts.get(i) <= 105) {
                 textsCoordinate[2 * i] = circleCentre[0] + (radiusPie + gapTextPie) * Math.cos(angleOfTexts.get(i) * Math.PI / 180) - (textsWidth.get(i) / 2);
                 textsCoordinate[2 * i + 1] = circleCentre[1] - (radiusPie + gapTextPie) * Math.sin(angleOfTexts.get(i) * Math.PI / 180); 
             }
-            else if(angleOfTexts.get(i) > 100 && angleOfTexts.get(i) <= 180) {
+            else if(angleOfTexts.get(i) > 105 && angleOfTexts.get(i) <= 180) {
                 textsCoordinate[2 * i] = circleCentre[0] + (radiusPie + gapTextPie) * Math.cos(angleOfTexts.get(i) * Math.PI / 180) - textsWidth.get(i);
                 textsCoordinate[2 * i + 1] = circleCentre[1] - (radiusPie + gapTextPie) * Math.sin(angleOfTexts.get(i) * Math.PI / 180); 
             }
-            else if(angleOfTexts.get(i) > 180 && angleOfTexts.get(i) < 260) {
+            else if(angleOfTexts.get(i) > 180 && angleOfTexts.get(i) < 255) {
                 textsCoordinate[2 * i] = circleCentre[0] + (radiusPie + gapTextPie) * Math.cos(angleOfTexts.get(i) * Math.PI / 180) - textsWidth.get(i);
                 textsCoordinate[2 * i + 1] = circleCentre[1] - (radiusPie + gapTextPie) * Math.sin(angleOfTexts.get(i) * Math.PI / 180) + + textsGroup.get(i).getLayoutBounds().getHeight() / 2;
             }
-            else if(angleOfTexts.get(i) > 280) {
+            else if(angleOfTexts.get(i) > 285) {
                 textsCoordinate[2 * i] = circleCentre[0] + (radiusPie + gapTextPie) * Math.cos(angleOfTexts.get(i) * Math.PI / 180);
                 textsCoordinate[2 * i + 1] = circleCentre[1] - (radiusPie + gapTextPie) * Math.sin(angleOfTexts.get(i) * Math.PI / 180) + textsGroup.get(i).getLayoutBounds().getHeight() / 2; 
             }
@@ -225,13 +235,13 @@ public class Pie extends Application {
         root.getChildren().addAll(circle);
 
         // Draw the Line
-        for(int i = 0; i < this.maximum; i++) {
+        for(int i = 0; i < maximum; i++) {
             Line line = new Line(circleCentre[0], circleCentre[1], lineEndCoordinate[2 * i], lineEndCoordinate[2 * i + 1]);
             root.getChildren().addAll(line);
         }
 
         // Set the Text Coordinate.
-        for(int i = 0; i < this.maximum; i++) {
+        for(int i = 0; i < maximum; i++) {
             textsGroup.get(i).setX(textsCoordinate[2 * i]);
             textsGroup.get(i).setY(textsCoordinate[2 * i + 1]);
             root.getChildren().addAll(textsGroup.get(i));
@@ -261,10 +271,66 @@ public class Pie extends Application {
         
     }
 
+    // --- Set Initial Data area ----------------------------- Below ---
+
+    /**
+     * This method likes the constructor in normal class, and it sets the value of the global variables expenditures and maximum from parameter and set the global variables radiusPie with a default value.
+     * @param expendituresArgs The data of Expenditure object which would be shown as Pie Chart.
+     * @param maximumArgs The maximum items which user would like to show in Pie Chart.
+     * @throws IllegalArgumentException The length of Array expendituresArgs is less than the maximumArgs.
+     */
+    public static void setValues(Expenditure[] expendituresArgs, int maximumArgs) throws IllegalArgumentException {
+        if(expendituresArgs.length < maximumArgs) {
+            throw new IllegalArgumentException("The length of Array expendituresArgs must be greater than or equal to the maximumArgs");
+        }
+        else {
+            expenditures = expendituresArgs;
+            maximum = maximumArgs;
+            radiusPie = 100; // 100 is the Default value.
+            gapTextPie = radiusPie * 0.1;
+        }
+    }
+
+    /**
+     * This method likes the constructor in normal class, and it sets the value of the global variables expenditures and maximum and radiusPie from parameter.
+     * @param expendituresArgs The data of Expenditure object which would be shown as Pie Chart.
+     * @param maximumArgs The maximum items which user would like to show in Pie Chart.
+     * @param radiusPie The radius of circle in Pie Chart.
+     * @throws IllegalArgumentException The length of Array expendituresArgs is less than the maximumArgs.
+     */
+    public static void setValues(Expenditure[] expendituresArgs, int maximumArgs, double radiusPieArgs) throws IllegalArgumentException {
+        if(expendituresArgs.length < maximumArgs) {
+            throw new IllegalArgumentException("The length of Array expendituresArgs must be greater than or equal to the maximumArgs");
+        }
+        else {
+            expenditures = expendituresArgs;
+            maximum = maximumArgs;
+            radiusPie = radiusPieArgs;
+            gapTextPie = radiusPie * 0.1;
+        }
+    }
+
+    // --- Set Initial Data area ----------------------------- Above ---
+
     /**
      * main method to launch the application.
      */
     public static void main(String[] args) {
+        //Data of Expenditure.
+        Expenditure[] expendituresArgs = new Expenditure[] {
+            new Expenditure("Salaries", 11000),
+            new Expenditure("Paper", 2000),
+            new Expenditure("Rent", 5000),
+            new Expenditure("Most popular books on Java etc.",10000),
+            new Expenditure("Heating", 3000),
+            new Expenditure("Coffee/Tea", 7000),
+            new Expenditure("Biscuits", 8000),
+            new Expenditure("Travel", 18000),
+            new Expenditure("Electricity", 1000),
+            new Expenditure("Pencils", 3000)
+        };
+        int maximumArgs = 8;
+        setValues(expendituresArgs, maximumArgs);
         launch(args);
     }
 }
