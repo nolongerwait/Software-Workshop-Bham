@@ -44,7 +44,7 @@ public class Waffle extends Application {
     private static final double SCALING_RATIO_LEGEND = 0.6;
 
     // This is a default chart color scheme with twelve colors.
-    private final Color[] color = new Color[] {
+    private static final Color[] color = new Color[] {
         Color.web("#00a8e1"),
         Color.web("#99cc00"),
         Color.web("#e30039"),
@@ -58,23 +58,6 @@ public class Waffle extends Application {
         Color.web("#0000ff"),
         Color.web("#c8cc00")
     };
-
-    // I have tried writing a method to create gradient colors. But the effect was not satisfactory.
-    /*
-    public void createColors() {
-        Color[] colors = new Color[this.maximum];
-        int red = 0;
-        int green = 0;
-        int blue = 0;
-        for(int i = 0; i < this.maximum; i++) {
-            colors[i] = Color.rgb(red, green, blue);
-            red += 10;
-            green += 25;
-            blue += 10;
-        }
-        this.color = colors;
-    }
-    */
 
     /**
      * Standard constructor of the abstract class Waffle.
@@ -191,7 +174,7 @@ public class Waffle extends Application {
         int countSquare = 0; // Count the number of square which has been drawn.
         for(int i = 0; i < maximum; i++) {
             for(int indexOfNumberOfEachItem = 0; indexOfNumberOfEachItem < numberOfEachItem.get(i); indexOfNumberOfEachItem++) {
-                drawSquare(root, xCoordinateOfEachSquare[countSquare], yCoordinateOfEachSquare[countSquare], squareWidth, (this.color)[i]);
+                drawSquare(root, xCoordinateOfEachSquare[countSquare], yCoordinateOfEachSquare[countSquare], squareWidth, color[i]);
                 countSquare++;
             }
         }
@@ -284,7 +267,7 @@ public class Waffle extends Application {
                 title = expenditures[i].getDescription();
             }
             double xLegendTextCoordinate = xLegendTextCoordinate(xLegendCoordinate, squareWidth);
-            drawLegendLine(root, xLegendCoordinate, yLegendCorrdinates[i], xLegendTextCoordinate, squareWidth, title, (this.color)[i]);
+            drawLegendLine(root, xLegendCoordinate, yLegendCorrdinates[i], xLegendTextCoordinate, squareWidth, title, color[i]);
         }
     }
 
@@ -363,7 +346,7 @@ public class Waffle extends Application {
      * main method to launch the application.
      */
     public static void main(String[] args) {
-        //Data of Expenditure.
+        // Data
         Expenditure[] expendituresArgs = new Expenditure[] {
             new Expenditure("Salaries", 11000),
             new Expenditure("Paper", 2000),
@@ -377,7 +360,9 @@ public class Waffle extends Application {
             new Expenditure("Pencils", 3000)
         };
         int maximumArgs = 8;
+        // Set Vaules
         setValues(expendituresArgs, maximumArgs);
+        // Launch
         launch();
     }
 }

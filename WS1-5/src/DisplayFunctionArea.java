@@ -76,8 +76,7 @@ public class DisplayFunctionArea extends Application{
      * @param b The maximal x-value in the interval. 
      * @return The polygon corresponding to the area between the function f and the x-axis over the interval [a,b] with granularity n.
      */
-    public static Polygon functionToPolygon(Function<Double,Double> f,
-                                    int n, double a, double b) {
+    public static Polygon functionToPolygon(Function<Double,Double> f, int n, double a, double b) {
         if (a >= b) {
             throw new IllegalArgumentException();
         } else {

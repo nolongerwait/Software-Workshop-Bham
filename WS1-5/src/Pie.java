@@ -132,8 +132,20 @@ public class Pie extends Application {
         // Compute the X coordinate
         double maxWidth = 0;
         for(int i = 0; i < maximum; i++) {
-            if(angleOfTexts.get(i) > 90 && angleOfTexts.get(i) < 270) {
+            if(angleOfTexts.get(i) >= 75 && angleOfTexts.get(i) <= 105) {
+                double totalWidth = textsWidth.get(i) / 2 + (-(radiusPie + gapTextPie) * Math.cos(angleOfTexts.get(i) * Math.PI / 180));
+                if(totalWidth > maxWidth) {
+                    maxWidth = totalWidth;
+                }
+            }
+            else if(angleOfTexts.get(i) > 105 && angleOfTexts.get(i) < 255) {
                 double totalWidth = textsWidth.get(i) + (-(radiusPie + gapTextPie) * Math.cos(angleOfTexts.get(i) * Math.PI / 180));
+                if(totalWidth > maxWidth) {
+                    maxWidth = totalWidth;
+                }
+            }
+            else if(angleOfTexts.get(i) >= 255 && angleOfTexts.get(i) <= 285) {
+                double totalWidth = textsWidth.get(i) / 2 + (-(radiusPie + gapTextPie) * Math.cos(angleOfTexts.get(i) * Math.PI / 180));
                 if(totalWidth > maxWidth) {
                     maxWidth = totalWidth;
                 }
@@ -316,7 +328,7 @@ public class Pie extends Application {
      * main method to launch the application.
      */
     public static void main(String[] args) {
-        //Data of Expenditure.
+        // Data
         Expenditure[] expendituresArgs = new Expenditure[] {
             new Expenditure("Salaries", 11000),
             new Expenditure("Paper", 2000),
@@ -330,7 +342,9 @@ public class Pie extends Application {
             new Expenditure("Pencils", 3000)
         };
         int maximumArgs = 8;
+        // Set Vaules
         setValues(expendituresArgs, maximumArgs);
+        // Launch
         launch(args);
     }
 }
