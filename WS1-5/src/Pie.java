@@ -73,7 +73,7 @@ public class Pie extends Application {
             }
             sumOfEachItem += angleOfEach;
         }
-        System.out.print("\nAngle of Each Item:" + angleOfEachItem.toString());
+
         return angleOfEachItem;
     }
 
@@ -90,7 +90,7 @@ public class Pie extends Application {
             angleOfTexts.add(angleOfText);
             countLastAngle += itor;
         }
-        System.out.print("\nAngle OF Texts:" +angleOfTexts.toString());
+
         return angleOfTexts;
     }
 
@@ -151,7 +151,7 @@ public class Pie extends Application {
                 }
             }
         }
-        System.out.print(maxWidth);
+
         double xCircleCentre = (Math.round(maxWidth / 10) + 1) * 10;
 
         // Compute the Y coordinate
@@ -160,7 +160,7 @@ public class Pie extends Application {
 
         circleCentre[0] = xCircleCentre;
         circleCentre[1] = yCircleCentre;
-        System.out.println("\nCirCle Center:" + Arrays.toString(circleCentre));
+
         return circleCentre;
     }
 
@@ -219,7 +219,7 @@ public class Pie extends Application {
                 textsCoordinate[2 * i + 1] = circleCentre[1] - (radiusPie + gapTextPie) * Math.sin(angleOfTexts.get(i) * Math.PI / 180) + textsGroup.get(i).getLayoutBounds().getHeight() / 2; 
             }
         }
-        System.out.print("\n Coordinates of Text:" + Arrays.toString(textsCoordinate));
+
         return textsCoordinate;
     }
 
@@ -265,9 +265,6 @@ public class Pie extends Application {
      * @param stage The window to be displayed.
      */
     public void start(Stage stage) throws Exception {
-        double radiusPie = 100;
-        double gapTextPie = 10;
-        
         ArrayList<Double> angleOfEachItem = caculateAngleOfEachItem();
         ArrayList<Double> angleOfTexts = caculateAngleOfEachText(angleOfEachItem);
 
@@ -333,7 +330,7 @@ public class Pie extends Application {
             new Expenditure("Salaries", 11000),
             new Expenditure("Paper", 2000),
             new Expenditure("Rent", 5000),
-            new Expenditure("Most popular books on Java etc.",10000),
+            new Expenditure("Most popular books on Java etc.",3000),
             new Expenditure("Heating", 3000),
             new Expenditure("Coffee/Tea", 7000),
             new Expenditure("Biscuits", 8000),
