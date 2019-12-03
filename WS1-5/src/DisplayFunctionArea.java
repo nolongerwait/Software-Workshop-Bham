@@ -9,6 +9,12 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Polyline;
 
 /**
+ * The main problems in this program occur in three methods, namely, functionToPolygon(), functionToPolyline() and drawYAxis().
+ * <pre>
+ * 1. In functionToPolygon() method, it should calculate the coordinates used for drawing, not the x and y values in the function inputted. And it also lacks the coordinates of the last two points of the polygon, which are the right and left endpoints of the x axis (please note the order!).
+ * 2. In functionToPolyline() method, it should calculate the coordinates used for drawing, not the x and y values in the function inputted. And it aslo should calculate the maximum and minimum values of the function in the [a, b] interval.
+ * 3. In drawYAxis() method, the abscissa of the Y axis should be 0 - a instead of b - 0.
+ * </pre>
  * This class is to display a non-constant function such as x goes to x*x and the area between the function graph and the x-axis in a given interval [a,b].  It is done by drawing the x-axis and the y-axis as well as defining a polyline from the function, the end-point (b, f(b)) and the starting point at (a, f(a)) and then displaying the corresponding polygon filled with colour and adquately scaled.
  *
  * @version 2019-11-17

@@ -11,7 +11,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
- * The Waffle class has 2 field variables, namely expenditures, maximum of types Expenditure[] and int.
+ * The Waffle class draws the corresponding waffle chart using the data provided.
  * @author Zetian Qin zxq876
  * @version 2019-11-25 15:50:11
  */
@@ -44,7 +44,7 @@ public class Waffle extends Application {
     private static final double SCALING_RATIO_LEGEND = 0.6;
 
     // This is a default chart color scheme with twelve colors.
-    private static final Color[] color = new Color[] {
+    private static Color[] color = new Color[] {
         Color.web("#00a8e1"),
         Color.web("#99cc00"),
         Color.web("#e30039"),
@@ -59,17 +59,17 @@ public class Waffle extends Application {
         Color.web("#c8cc00")
     };
 
+    // --- Set the color scheme needed in Waffle Chart ------ Below ---
+
     /**
-     * Standard constructor of the abstract class Waffle.
-     * @param expenditures // The data of expenditures which would be displayed.
-     * @param maximum // The maximum of the kind of expenditures which would be displayed.
+     * This method could change the color scheme.
+     * @param colorArgs The color scheme array to change the default colors.
      */
-    /*
-    public Waffle(Expenditure[] expenditures, int maximum) {
-        this.expenditures = Arrays.copyOf(expenditures, expenditures.length);
-        this.maximum = maximum;
+    public void setColor(Color[] colorArgs) {
+        color = colorArgs;
     }
-    */
+
+    // --- Set the color scheme needed in Waffle Chart ------ Above ---
 
     // --- Compute the data which is needed in Waffle Chart - Below ---
 
@@ -174,7 +174,7 @@ public class Waffle extends Application {
         int countSquare = 0; // Count the number of square which has been drawn.
         for(int i = 0; i < maximum; i++) {
             for(int indexOfNumberOfEachItem = 0; indexOfNumberOfEachItem < numberOfEachItem.get(i); indexOfNumberOfEachItem++) {
-                drawSquare(root, xCoordinateOfEachSquare[countSquare], yCoordinateOfEachSquare[countSquare], squareWidth, color[i]);
+                drawSquare(root, xCoordinateOfEachSquare[countSquare], yCoordinateOfEachSquare[countSquare], squareWidth, color[(i % color.length)]);
                 countSquare++;
             }
         }
@@ -267,7 +267,7 @@ public class Waffle extends Application {
                 title = expenditures[i].getDescription();
             }
             double xLegendTextCoordinate = xLegendTextCoordinate(xLegendCoordinate, squareWidth);
-            drawLegendLine(root, xLegendCoordinate, yLegendCorrdinates[i], xLegendTextCoordinate, squareWidth, title, color[i]);
+            drawLegendLine(root, xLegendCoordinate, yLegendCorrdinates[i], xLegendTextCoordinate, squareWidth, title, color[(i % color.length)]);
         }
     }
 
