@@ -32,7 +32,7 @@ public class Upload extends Application {
         // The offset is the position
         double offsetXUpIcon = scene.getWidth() / 2;
         double offsetYUpIcon = 40.0;
-
+        // The basic point of upper icon.
         double upIconSmallX = 10;
         double upIconBigX = 30;
         double upIconSmallY = 25;
@@ -47,11 +47,12 @@ public class Upload extends Application {
                 upIcon.getPoints().set(i, upIcon.getPoints().get(i) + offsetYUpIcon);
             }
         }
-
+        // New a down icon using the polygon.
         Polygon downIcon = new Polygon();
+        // The offset is the position.
         double offsetXDownIcon = scene.getWidth() / 2;
         double offsetYDownIcon = 160;
-
+        // The basic point of down icon.
         double downIconSmallX = 60;
         double downIconBigX = 80;
         double downIconBigY = 80;
