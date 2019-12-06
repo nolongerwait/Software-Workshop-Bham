@@ -330,7 +330,7 @@ public class Pie extends Application {
             new Expenditure("Salaries", 11000),
             new Expenditure("Paper", 2000),
             new Expenditure("Rent", 5000),
-            new Expenditure("Most popular books on Java etc.",10000),
+            new Expenditure("Most popular books on Java etc.",90000),
             new Expenditure("Heating", 3000),
             new Expenditure("Coffee/Tea", 7000),
             new Expenditure("Biscuits", 8000),
