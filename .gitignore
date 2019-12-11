@@ -23,6 +23,6 @@
 hs_err_pid*
 .metadata
 .vscode
-
+.DS_Store
 # gitignore
 .gitignore
