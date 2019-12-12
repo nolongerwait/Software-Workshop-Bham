@@ -4,17 +4,19 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * This program designed for the Question 2 of Part B in Assignment 3 Algorithm Design & Analysis (and Revision).
- * <pre>
- * Write a Java program that is a mini-interpreter for a toy programming language that allows the following:
+ * This program designed for the Question 2 of Part B in Assignment 3 Algorithm Design and Analysis (and Revision).
+ * <p>
+ * Write a Java program that is a mini-interpreter for a toy programming language that allows the following
  * <ol>
- * <li>The use of variables that consist of a single letter (e.g. A, a, ...).</li>
- * <li>The use of whole numbers: ( e.g. -1, -20, 0, 1, 200), NOTE: All the number are integer.</li>
- * <li>Assignment (=): ( e.g. A = B, A = 10, ) </li>
- * <li>Addition of exactly two elements (variables or constants) (+) ( e.g. C = A + B, D = 1 + A, ... ), NOTE: It supports negative sign operations in addition, but does not support assignment to a negative variable ( e.g. -C = A + B is legal, C = -A + B is also legal).</li>
- * <li>The ability to "return" a value when a single variable or constant is on a line by itself ( e.g. A, B, 10)</li>
+ * <li>The use of variables that consist of a single letter (e.g. A, a, ...).
+ * <li>The use of whole numbers: ( e.g. -1, -20, 0, 1, 200), NOTE: All the number are integer.
+ * <li>Assignment (=): ( e.g. A = B, A = 10, )
+ * <li>Addition of exactly two elements (variables or constants) (+) ( e.g. C = A + B, D = 1 + A, ... )
+ * <ul>
+ * <li>NOTE: It supports negative sign operations in addition, but does not support assignment to a negative variable ( e.g. -C = A + B is legal, C = -A + B is also legal).
+ * </ul>
+ * <li>The ability to "return" a value when a single variable or constant is on a line by itself ( e.g. A, B, 10)
  * </ol>
- * </pre>
  * @author Zetian Qin zxq876
  * @version 2019-12-11 16:58:09
  */
@@ -36,7 +38,7 @@ public class PartBQuestion2 {
     }
 
     /**
-     * addition method could process the addition in each sub-statement.
+     * Addition method could process the addition in each sub-statement.
      * NOTE: The sub-statement does not start with '-'! And the left value of statement is variable wihtout minus!
      * @param strCopy A string copy from the sub-statement, as String.
      * @param storeVariables The Map container that holds variables and values, as Map.
@@ -154,14 +156,37 @@ public class PartBQuestion2 {
             }
         }
     }
+    
+    /**
+     * ReturnStatements method could process return in return sub-statement
+     * @param str The sub-statement which need to return value, as String.
+     * @param storeVariables The Map container that holds variables and values, as Map.
+     * @return The value which will be returned or printed in Screan, as int.
+     */
+    public static int returnStatements(String str, Map<Character,Integer> storeVariables) {
+        int valueToReturn = 0;
+        // If the sub-statement is number, it just returns the value.
+        if(HasDigit(str)){
+            valueToReturn = Integer.parseInt(str);
+        }
+        // The sub-statement is variable and the variable has minus sign, it returns the value of the minus variable.
+        else if(str.contains("-")) {
+            valueToReturn = -(storeVariables.get(str.charAt(1)));
+        }
+        // Normal return, just return the value of the variable.
+        else {
+            valueToReturn = storeVariables.get(str.charAt(0));
+        }
+        return valueToReturn;
+    }
 
     /**
-     * ComputeTheResult method could achieve the function which is required in Part B question 2.
+     * ToyProgram method could achieve the function which is required in Part B question 2.
      * This method could achieve mini-interpreter for a toy programming language and return the result.
      * @param str The input of the toy programming language, as String.
      * @return The result of the toy programming language, as int.
      */
-    public static int computeTheResult(String str) {
+    public static int toyProgram(String str) {
         int result = 0;
         Map<Character, Integer> storeVariables = new HashMap<Character, Integer>();
         String[] subStatement = str.split("\n");
@@ -170,20 +195,9 @@ public class PartBQuestion2 {
             if(subStatement[i].contains("=")) {
                 assignmentStatements(subStatement[i], storeVariables);
             }
-            // If the sub-statement is number, it just returns the value.
-            else if(HasDigit(subStatement[i])){
-                result = Integer.parseInt(subStatement[i]);
-                break;
-            }
-            // The sub-statement is variable and the variable has minus sign, it returns the value of the minus variable.
-            else if(subStatement[i].contains("-")) {
-                result = -(storeVariables.get(subStatement[i].charAt(1)));
-                break;
-            }
-            // Normal return, just return the value of the variable.
+            // If the sub-statement does not contain "=", it goes to process return.
             else {
-                result = storeVariables.get(subStatement[i].charAt(0));
-                break;
+                result = returnStatements(subStatement[i], storeVariables);
             }
         }
         return result;
@@ -191,7 +205,8 @@ public class PartBQuestion2 {
 
     public static void main(String[] args) {
         String strTestCase1 = "-A = 2\nB = 22\nZ = 91\n-K = -A + B\nZ = K + A\n-Z";
-        int result = computeTheResult(strTestCase1);
-        System.out.println(result);
+        System.out.println(toyProgram(strTestCase1));
+        String strTestCase2 = "8";
+        System.out.println(toyProgram(strTestCase2));
     }
 }
