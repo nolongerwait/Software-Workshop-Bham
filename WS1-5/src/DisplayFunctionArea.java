@@ -33,7 +33,7 @@ public class DisplayFunctionArea extends Application{
     /**
      * f is the function to be displayed. We introduce it as a global variable so that it can be used in the start method, but be defined in the main method.
      */
-    private static Function<Double,Double> f;
+    //private static Function<Double,Double> f;
 
     /** 
       * a is the left border of the interval on which the function is to be displayed. We introduce it as a global variable so that it can be used in the start method, but be defined in the main method.
@@ -92,7 +92,7 @@ public class DisplayFunctionArea extends Application{
              * for a, b and n-1 equidistant values in between.
              * The (x_i,y_i) values are added to the points array in pairs.
              */
-            for (int i = 0; i <= n ; i++){
+            for (int i = 0; i <= DisplayFunctionArea.n ; i++){
                 x = a + (b - a) * i / n;
                 y = f.apply(x);
                 // Changed - The actual coordinates of Points in PolyLine, not the x and y in f function.
