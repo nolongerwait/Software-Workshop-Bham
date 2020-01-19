@@ -135,6 +135,5 @@ public class Worksheet1 {
 		else {
 			return new List<Integer>(a.getHead(), removeDuplicates(a.getTail()));
 		}
-		
 	}
 }
