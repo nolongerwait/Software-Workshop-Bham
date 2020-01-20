@@ -172,9 +172,9 @@ public class Worksheet1Test {
         assertEquals(exceptedCase1, Worksheet1.removeDuplicates(testCase1));
 
         // Test for the List in normal case
-        List<Integer> testCase2 = new List<Integer>(9,new List<Integer>(9,new List<Integer>(8, new List<Integer>(8, new List<Integer>(7, new List<Integer>())))));
+        List<Integer> testCase2 = new List<Integer>(999,new List<Integer>(999,new List<Integer>(8, new List<Integer>(8, new List<Integer>(7, new List<Integer>())))));
 
-        List<Integer> exceptedCase2 = new List<Integer>(9,new List<Integer>(8, new List<>(7, new List<Integer>())));
+        List<Integer> exceptedCase2 = new List<Integer>(999,new List<Integer>(8, new List<>(7, new List<Integer>())));
 
         assertEquals(exceptedCase2, Worksheet1.removeDuplicates(testCase2));
     }

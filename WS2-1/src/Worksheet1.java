@@ -123,13 +123,10 @@ public class Worksheet1 {
 	// Exercise 8
 
 	static List<Integer> removeDuplicates(List<Integer> a) {
-		if(a.isEmpty()) {
-			return new List<Integer>();
+		if(a.isEmpty() || a.getTail().isEmpty()) {
+			return a;
 		}
-		else if(a.getTail().isEmpty()) {
-			return new List<Integer>(a.getHead(), new List<Integer>());
-		}
-		else if(a.getHead() == a.getTail().getHead()) {
+		else if(a.getHead().equals(a.getTail().getHead())) {
 			return removeDuplicates(a.getTail());
 		}
 		else {
