@@ -1,6 +1,5 @@
 import java.io.*;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 /**
  *  The class implements the two methods in the interface. A
