@@ -5,7 +5,7 @@ import org.junit.jupiter.api.*;
 /**
  * In Self-Testing, the code should be tested against three different types, normal cases, boundary cases, and illegal cases.
  * <p>
- * This class contains  tests to test the basic functions in class Waffle.
+ * This class contains 8 tests to test the basic functions in class Worksheet1.
  * @author Zetian Qin zxq876
  * @version 2020-01-16 15:17:21
  */
@@ -41,16 +41,16 @@ public class Worksheet1Test {
         // Test for the List in normal case 
         List<Integer> testCase1 = new List<Integer>(2,new List<Integer>(-5, new List<Integer>(8, new List<Integer>(0,new List<Integer>()))));
 
-        List<Integer> exceptedCase1 = new List<Integer>(-2, new List<Integer>(5, new List<Integer>(-8, new List<Integer>(0, new List<Integer>()))));
+        List<Integer> expectedCase1 = new List<Integer>(-2, new List<Integer>(5, new List<Integer>(-8, new List<Integer>(0, new List<Integer>()))));
 
-        assertEquals(exceptedCase1, Worksheet1.negateAll(testCase1));
+        assertEquals(expectedCase1, Worksheet1.negateAll(testCase1));
 
         // Test for the empty List
         List<Integer> testCase2 = new List<Integer>();
 
-        List<Integer> exceptedCase2 = new List<Integer>();
+        List<Integer> expectedCase2 = new List<Integer>();
 
-        assertEquals(exceptedCase2, Worksheet1.negateAll(testCase2));
+        assertEquals(expectedCase2, Worksheet1.negateAll(testCase2));
     }
 
     @Test
@@ -85,23 +85,23 @@ public class Worksheet1Test {
         // Test for the normal case
         List<Integer> testCase1 = new List<Integer>(2,new List<Integer>(3,new List<Integer>(-5, new List<Integer>(8, new List<Integer>(-2, new List<Integer>())))));
 
-        List<Integer> exceptedCase1 = new List<Integer>(2, new List<Integer>(8, new List<Integer>(-2, new List<Integer>())));
+        List<Integer> expectedCase1 = new List<Integer>(2, new List<Integer>(8, new List<Integer>(-2, new List<Integer>())));
 
-        assertEquals(exceptedCase1, Worksheet1.evenNumbers(testCase1));
+        assertEquals(expectedCase1, Worksheet1.evenNumbers(testCase1));
 
         // Test for the List does not contain even numbers
         List<Integer> testCase2 = new List<Integer>(1,new List<Integer>(3,new List<Integer>(-5, new List<Integer>(9, new List<Integer>(-1, new List<Integer>())))));
 
-        List<Integer> exceptedCase2 = new List<Integer>();
+        List<Integer> expectedCase2 = new List<Integer>();
 
-        assertEquals(exceptedCase2, Worksheet1.evenNumbers(testCase2));
+        assertEquals(expectedCase2, Worksheet1.evenNumbers(testCase2));
 
         // Test for empty List
         List<Integer> testCase3 = new List<Integer>();
 
-        List<Integer> exceptedCase3 = new List<Integer>();
+        List<Integer> expectedCase3 = new List<Integer>();
 
-        assertEquals(exceptedCase3, Worksheet1.evenNumbers(testCase3));
+        assertEquals(expectedCase3, Worksheet1.evenNumbers(testCase3));
     }
 
     @Test
@@ -116,6 +116,11 @@ public class Worksheet1Test {
         List<Integer> testCase2 = new List<Integer>(2,new List<Integer>(4,new List<Integer>(-6, new List<Integer>(8, new List<Integer>(-2, new List<Integer>())))));
 
         assertFalse(Worksheet1.sorted(testCase2));
+
+        // Test for the empty List
+        List<Integer> testCase3 = new List<Integer>();
+        
+        assertTrue(Worksheet1.sorted(testCase3));
     }
 
     @Test
@@ -125,58 +130,71 @@ public class Worksheet1Test {
         List<Integer> testCase1a = new List<Integer>(8,new List<Integer>(2,new List<Integer>()));
         List<Integer> testCase1b = new List<Integer>(9,new List<Integer>(8, new List<Integer>(7, new List<Integer>(5,new List<Integer>()))));
 
-        List<Integer> exceptedCase1 = new List<Integer>(9, new List<Integer>(8, new List<Integer>(8, new List<Integer>(7, new List<Integer>(5, new List<Integer>(2, new List<Integer>()))))));
+        List<Integer> expectedCase1 = new List<Integer>(9, new List<Integer>(8, new List<Integer>(8, new List<Integer>(7, new List<Integer>(5, new List<Integer>(2, new List<Integer>()))))));
 
-        assertEquals(exceptedCase1, Worksheet1.merge(testCase1a,testCase1b));
+        assertEquals(expectedCase1, Worksheet1.merge(testCase1a,testCase1b));
 
         // Test for the number of Node in List a is more than List b
         List<Integer> testCase2a = new List<Integer>(8,new List<Integer>(5,new List<Integer>(5, new List<Integer>(2, new List<Integer>()))));
         List<Integer> testCase2b = new List<Integer>(9,new List<Integer>());
 
-        List<Integer> exceptedCase2 = new List<Integer>(9, new List<Integer>(8, new List<Integer>(5, new List<Integer>(5, new List<Integer>(2, new List<Integer>())))));
+        List<Integer> expectedCase2 = new List<Integer>(9, new List<Integer>(8, new List<Integer>(5, new List<Integer>(5, new List<Integer>(2, new List<Integer>())))));
 
-        assertEquals(exceptedCase2, Worksheet1.merge(testCase2a,testCase2b));
+        assertEquals(expectedCase2, Worksheet1.merge(testCase2a,testCase2b));
 
         // Test for the number of Node in List a is equal to List b
         List<Integer> testCase3a = new List<Integer>(8,new List<Integer>(5,new List<Integer>(5, new List<Integer>(2, new List<Integer>()))));
         List<Integer> testCase3b = new List<Integer>(9,new List<Integer>(8, new List<Integer>(7, new List<Integer>(5, new List<Integer>()))));
-        List<Integer> exceptedCase3 = new List<Integer>(9, new List<Integer>(8, new List<Integer>(8, new List<Integer>(7, new List<Integer>(5, new List<Integer>(5, new List<Integer>(5, new List<Integer>(2, new List<Integer>()))))))));
+        List<Integer> expectedCase3 = new List<Integer>(9, new List<Integer>(8, new List<Integer>(8, new List<Integer>(7, new List<Integer>(5, new List<Integer>(5, new List<Integer>(5, new List<Integer>(2, new List<Integer>()))))))));
 
-        assertEquals(exceptedCase3, Worksheet1.merge(testCase3a,testCase3b));
+        assertEquals(expectedCase3, Worksheet1.merge(testCase3a,testCase3b));
 
         // Test for the List a is empty
         List<Integer> testCase4a = new List<Integer>();
         List<Integer> testCase4b = new List<Integer>(9,new List<Integer>(8, new List<Integer>(7, new List<Integer>(5, new List<Integer>()))));
 
-        List<Integer> exceptedCase4 = new List<Integer>(9,new List<Integer>(8, new List<Integer>(7, new List<Integer>(5, new List<Integer>()))));
+        List<Integer> expectedCase4 = new List<Integer>(9,new List<Integer>(8, new List<Integer>(7, new List<Integer>(5, new List<Integer>()))));
 
-        assertEquals(exceptedCase4, Worksheet1.merge(testCase4a,testCase4b));
+        assertEquals(expectedCase4, Worksheet1.merge(testCase4a,testCase4b));
 
         // Test for the List b is empty
         List<Integer> testCase5a = new List<Integer>(8,new List<Integer>(5,new List<Integer>(5, new List<Integer>(2, new List<Integer>()))));
         List<Integer> testCase5b = new List<Integer>();
 
-        List<Integer> exceptedCase5 = new List<Integer>(8,new List<Integer>(5,new List<Integer>(5, new List<Integer>(2, new List<Integer>()))));
+        List<Integer> expectedCase5 = new List<Integer>(8,new List<Integer>(5,new List<Integer>(5, new List<Integer>(2, new List<Integer>()))));
 
-        assertEquals(exceptedCase5, Worksheet1.merge(testCase5a,testCase5b));
+        assertEquals(expectedCase5, Worksheet1.merge(testCase5a,testCase5b));
     }
 
     @Test
     @DisplayName("Tests for the Exercise 8")
     public void test8() {
+        // Test for the empty List
+        List<Integer> testCase1 = new List<Integer>(); 
+        List<Integer> expectedCase1 = new List<Integer>();
+        
+        assertEquals(expectedCase1, testCase1);
+
         // Test for the List which all elements are same
-        List<Integer> testCase1 = new List<Integer>(9,new List<Integer>(9,new List<Integer>(9, new List<Integer>(9, new List<Integer>(9, new List<Integer>())))));
+        List<Integer> testCase2 = new List<Integer>(9,new List<Integer>(9,new List<Integer>(9, new List<Integer>(9, new List<Integer>(9, new List<Integer>())))));
 
-        List<Integer> exceptedCase1 = new List<Integer>(9,new List<Integer>());
+        List<Integer> expectedCase2 = new List<Integer>(9,new List<Integer>());
 
-        assertEquals(exceptedCase1, Worksheet1.removeDuplicates(testCase1));
+        assertEquals(expectedCase2, Worksheet1.removeDuplicates(testCase2));
 
         // Test for the List in normal case
-        List<Integer> testCase2 = new List<Integer>(999,new List<Integer>(999,new List<Integer>(8, new List<Integer>(8, new List<Integer>(7, new List<Integer>())))));
+        List<Integer> testCase3 = new List<Integer>(999,new List<Integer>(999,new List<Integer>(8, new List<Integer>(8, new List<Integer>(7, new List<Integer>())))));
 
-        List<Integer> exceptedCase2 = new List<Integer>(999,new List<Integer>(8, new List<>(7, new List<Integer>())));
+        List<Integer> expectedCase3 = new List<Integer>(999,new List<Integer>(8, new List<>(7, new List<Integer>())));
 
-        assertEquals(exceptedCase2, Worksheet1.removeDuplicates(testCase2));
+        assertEquals(expectedCase3, Worksheet1.removeDuplicates(testCase3));
+
+        // Test for the List which has only one element
+        List<Integer> testCase4 = new List<Integer>(999,new List<Integer>());
+
+        List<Integer> expectedCase4 = new List<Integer>(999,new List<Integer>());
+
+        assertEquals(expectedCase4, Worksheet1.removeDuplicates(testCase4));
     }
 
     @AfterEach
