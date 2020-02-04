@@ -179,7 +179,7 @@ public class Worksheet2Test {
         // Empty Tree
         Tree<Integer> testCase1 = new Tree<Integer>();
         int expectedCase1 = 0;
-        assertEquals(expectedCase1, testCase1);
+        assertEquals(expectedCase1, Worksheet2.max(testCase1));
 
         // Normal Search Tree
         Tree<Integer> testCase2 = 
@@ -189,9 +189,9 @@ public class Worksheet2Test {
                     new Tree<Integer>(50)), 
                 new Tree<Integer>(96, 
                     new Tree<Integer>(90),
-                    new Tree<Integer>(100)));
+                    new Tree<Integer>(100   )));
         int expectedCase2 = 100;
-        assertEquals(expectedCase2, testCase2);
+        assertEquals(expectedCase2, Worksheet2.max(testCase2));
     }
 
     @Test

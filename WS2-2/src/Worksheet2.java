@@ -47,7 +47,10 @@ public class Worksheet2 implements Worksheet2Interface {
 	// Exercise 4
 
 	static <E> List<E> preorder(Tree<E> a) {
-		if(!a.getLeft().isEmpty() && a.getRight().isEmpty()) {
+		if(a.isEmpty()) {
+			return new List<E>();
+		}
+		else if(!a.getLeft().isEmpty() && a.getRight().isEmpty()) {
 			return new List<E>(a.getValue(), preorder(a.getLeft()));
 		}
 		else if(a.getLeft().isEmpty() && !a.getRight().isEmpty()) {
@@ -55,9 +58,6 @@ public class Worksheet2 implements Worksheet2Interface {
 		}
 		else if(a.getLeft().isEmpty() && a.getRight().isEmpty()) {
 			return new List<E>(a.getValue(), new List<E>());
-		}
-		else if (a.isEmpty()) {
-			return new List<E>();
 		}
 		else {
 			return append(new List<E>(a.getValue(), preorder(a.getLeft())), preorder(a.getRight()));
