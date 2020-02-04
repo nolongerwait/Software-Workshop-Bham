@@ -5,7 +5,7 @@ import org.junit.jupiter.api.*;
 /**
  * In Self-Testing, the code should be tested against three different types, normal cases, boundary cases, and illegal cases.
  * <p>
- * This class contains 8 tests to test the basic functions in class Worksheet2.
+ * This class contains 9 tests to test the basic functions in class Worksheet2.
  * @author Zetian Qin zxq876
  * @version 2020-01-23 15:08:38
  */
