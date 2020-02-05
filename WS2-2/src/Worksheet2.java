@@ -1,6 +1,6 @@
 /**
  * @author zxq876 Zetian Qin
- * 
+ * The solution of Worksheet2.
  */
 
 public class Worksheet2 implements Worksheet2Interface {
@@ -154,18 +154,18 @@ public class Worksheet2 implements Worksheet2Interface {
 		}
 		//have found the value note needed to be deleted
 		else if(a.getValue() == x) {
-			//Three cases, 1. the node without subtree
+			//the node without subtree
 			if(a.getRight().isEmpty() && a.getLeft().isEmpty()) {
 				return new Tree<Integer>();
 			}
-			//2. the node only have one subtree
+			//the node only have one subtree
 			else if(!a.getLeft().isEmpty() && a.getRight().isEmpty()) {
 				return a.getLeft();
 			}
 			else if(a.getLeft().isEmpty() && !a.getRight().isEmpty()) {
 				return a.getRight();
 			}
-			//3. the node have two subtrees
+			//the node have two subtrees
 			else {
 				return new Tree<Integer>(min(a.getRight()), a.getLeft(), delete(a.getRight(), min(a.getRight())));
 			}
@@ -258,7 +258,7 @@ public class Worksheet2 implements Worksheet2Interface {
 		}
 		//have found the value note needed to be deleted
 		else if(a.getValue() == x) {
-			//Three cases, 1. the node without subtree
+			//1. the node without subtree
 			if(a.getRight().isEmpty() && a.getLeft().isEmpty()) {
 				return new Tree<Integer>();
 			}
