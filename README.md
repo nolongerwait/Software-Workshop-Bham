@@ -19,6 +19,12 @@ See this file [WS1-5.pdf](Files/WS1-5.pdf)
 ## WorkSheet 2-1
 See this file [WS2-1.pdf](Files/WS2-1.pdf)
 
+## WorkSheet 2-2
+See this file [WS2-2.pdf](Files/WS2-2.pdf)
+
+## WorkSheet 2-3
+See this file [WS2-3.pdf](Files/WS2-3.pdf)
+
 ## Extra Work 1
 See this file [ew1.pdf](Files/ew1.pdf)
 
