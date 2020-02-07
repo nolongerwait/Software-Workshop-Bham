@@ -1,11 +1,15 @@
 package predictive;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Scanner;
 import java.util.Set;
 
 /**
- * 
+ * The PredictivePrototype has two method wordToSignature() and signatureToWords(), which could help to deal with signature and words.
  * @author zxq876 Zetian Qin
  * @version 2020-02-06 12:51:43
  */
@@ -22,7 +26,7 @@ public class PredictivePrototype {
      */
     public static String wordToSignature(String word) {
         StringBuffer result = new StringBuffer();
-        StringBuffer wordBuffer = new StringBuffer(word);
+        StringBuffer wordBuffer = new StringBuffer(word.toLowerCase());
 
         for(int i = 0; i < wordBuffer.length(); i++) {
             for(String itor:keyboard) {
@@ -54,6 +58,27 @@ public class PredictivePrototype {
      * @return All the words which match the given signature.
      */
     public static Set<String> signatureToWords(String signature) {
-        return null;
+        Set<String> result = new HashSet<String>();
+        Scanner scanner = null;
+        try
+        {
+            scanner = new Scanner(new
+            FileInputStream("/Users/welkin/eclipse-workspace/WS2-3/src/predictive/word"));
+        }catch(FileNotFoundException e)
+        {
+            System.out.println("File word was no found");
+            System.exit(0);
+        }
+        while(scanner.hasNextLine()) {
+            StringBuffer word = new StringBuffer(scanner.nextLine());
+            if(isValidWord(word.toString())) {
+                StringBuffer tempSignature = new StringBuffer(wordToSignature(word.toString()));
+                if(tempSignature.toString().equals(signature)) {
+                    result.add(word.toString());
+                }
+            }
+        }
+        scanner.close();
+        return result;
     }
 }

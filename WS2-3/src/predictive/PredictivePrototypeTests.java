@@ -1,6 +1,11 @@
 package predictive;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.io.FileNotFoundException;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.*;
 
 
@@ -24,22 +29,40 @@ public class PredictivePrototypeTests {
         String testCase1 = "hello";
         String expectedCase1 = "43556";
         assertEquals(expectedCase1, PredictivePrototype.wordToSignature(testCase1));
+
+        String testCase2 = "Dione";
+        String expectedCase2 = "34663";
+        assertEquals(expectedCase2, PredictivePrototype.wordToSignature(testCase2));
     }
 
     @Test
     @DisplayName("Tests for the isValidWord method")
     public void test2() {
-        String testCase1 = "hell0123";
+        String testCase1 = "hell0123jjj";
         assertFalse(PredictivePrototype.isValidWord(testCase1));
 
         String testCase2 = "";
         assertFalse(PredictivePrototype.isValidWord(testCase2));
 
-        String testCase3 = "hello";
+        String testCase3 = "Hello";
         assertTrue(PredictivePrototype.isValidWord(testCase3));
 
         String testCase4 = "1002";
         assertFalse(PredictivePrototype.isValidWord(testCase4));
+    }
+
+    @Test
+    @DisplayName("Tests for the signatureToWords method")
+    public void test3() throws FileNotFoundException{
+        String testCase1 = "4663";
+        Set<String> expectedCase1 = new HashSet<String>();
+        expectedCase1.add("good");
+        expectedCase1.add("gone");
+        expectedCase1.add("home");
+        expectedCase1.add("hone");
+        expectedCase1.add("hood");
+        expectedCase1.add("hoof");
+        assertEquals(expectedCase1, PredictivePrototype.signatureToWords(testCase1));
     }
 
     @AfterEach
