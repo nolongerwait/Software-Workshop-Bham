@@ -9,7 +9,7 @@ import java.util.Scanner;
 import java.util.Set;
 
 /**
- * The PredictivePrototype has two method wordToSignature() and signatureToWords(), which could help to deal with signature and words.
+ * The PredictivePrototype has 2 static methods wordToSignature() and signatureToWords(), which could help to deal with signature and words.
  * @author zxq876 Zetian Qin
  * @version 2020-02-06 12:51:43
  */
@@ -63,14 +63,14 @@ public class PredictivePrototype {
         try
         {
             scanner = new Scanner(new
-            FileInputStream("/Users/welkin/eclipse-workspace/WS2-3/src/predictive/word"));
+            FileInputStream("/Users/welkin/eclipse-workspace/WS2-3/src/predictive/words"));
         }catch(FileNotFoundException e)
         {
-            System.out.println("File word was no found");
+            System.out.println("File words was no found");
             System.exit(0);
         }
         while(scanner.hasNextLine()) {
-            StringBuffer word = new StringBuffer(scanner.nextLine());
+            StringBuffer word = new StringBuffer(scanner.nextLine().toLowerCase());
             if(isValidWord(word.toString())) {
                 StringBuffer tempSignature = new StringBuffer(wordToSignature(word.toString()));
                 if(tempSignature.toString().equals(signature)) {

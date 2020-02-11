@@ -33,6 +33,10 @@ public class PredictivePrototypeTests {
         String testCase2 = "Dione";
         String expectedCase2 = "34663";
         assertEquals(expectedCase2, PredictivePrototype.wordToSignature(testCase2));
+
+        String testCase3 = "";
+        String expectedCase3 = "";
+        assertEquals(expectedCase3, PredictivePrototype.wordToSignature(testCase3));
     }
 
     @Test
@@ -56,12 +60,20 @@ public class PredictivePrototypeTests {
     public void test3() throws FileNotFoundException{
         String testCase1 = "4663";
         Set<String> expectedCase1 = new HashSet<String>();
-        expectedCase1.add("good");
-        expectedCase1.add("gone");
-        expectedCase1.add("home");
-        expectedCase1.add("hone");
         expectedCase1.add("hood");
+        expectedCase1.add("ione");
+        expectedCase1.add("ioof");
+        expectedCase1.add("good");
+        expectedCase1.add("hond");
+        expectedCase1.add("inne");
+        expectedCase1.add("gond");
+        expectedCase1.add("hone");
         expectedCase1.add("hoof");
+        expectedCase1.add("gone");
+        expectedCase1.add("goof");
+        expectedCase1.add("ioof");
+        expectedCase1.add("home");
+        expectedCase1.add("gome");
         assertEquals(expectedCase1, PredictivePrototype.signatureToWords(testCase1));
     }
 
