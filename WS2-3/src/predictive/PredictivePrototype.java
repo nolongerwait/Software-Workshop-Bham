@@ -20,7 +20,7 @@ public class PredictivePrototype {
 
     /**
      * The method takes a word and returns a numeric signature.
-     * Since using StringBuffer, it could be more........
+     * Since using StringBuffer, it could be more efficient.
      * @param word The word we used daily
      * @return The signature of the word, as String type
      */

@@ -8,15 +8,17 @@ import java.util.Set;
 
 import org.junit.jupiter.api.*;
 
-
 /**
  * In Self-Testing, the code should be tested against three different types, normal cases, boundary cases, and illegal cases.
  * <p>
- * This class contains ? tests to test the basic functions in class PredictivePrototype.
+ * This class contains 3 tests to test the basic functions in class ListDictionary.
  * @author Zetian Qin zxq876
  * @version 2020-02-06 12:51:26
  */
-public class PredictivePrototypeTests {
+public class ListDictionaryTests {
+
+    ListDictionary wordsSigsDic = new ListDictionary("/Users/welkin/eclipse-workspace/WS2-3/src/predictive/words");
+
     @BeforeEach
 	public void setup(TestInfo testInfo) {
         System.out.println("Start......" + testInfo.getDisplayName());
@@ -27,15 +29,15 @@ public class PredictivePrototypeTests {
     public void test1() {
         String testCase1 = "hello";
         String expectedCase1 = "43556";
-        assertEquals(expectedCase1, PredictivePrototype.wordToSignature(testCase1));
+        assertEquals(expectedCase1, wordsSigsDic.wordToSignature(testCase1));
 
         String testCase2 = "Dione";
         String expectedCase2 = "34663";
-        assertEquals(expectedCase2, PredictivePrototype.wordToSignature(testCase2));
+        assertEquals(expectedCase2, wordsSigsDic.wordToSignature(testCase2));
 
         String testCase3 = "";
         String expectedCase3 = "";
-        assertEquals(expectedCase3, PredictivePrototype.wordToSignature(testCase3));
+        assertEquals(expectedCase3, wordsSigsDic.wordToSignature(testCase3));
     }
 
     @Test
@@ -73,7 +75,7 @@ public class PredictivePrototypeTests {
         expectedCase1.add("ioof");
         expectedCase1.add("home");
         expectedCase1.add("gome");
-        assertEquals(expectedCase1, PredictivePrototype.signatureToWords(testCase1));
+        assertEquals(expectedCase1, wordsSigsDic.signatureToWords(testCase1));
     }
 
     @AfterEach

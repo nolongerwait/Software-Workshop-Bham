@@ -37,11 +37,34 @@ public class WordSig implements Comparable<WordSig> {
      */
     @Override
     public int compareTo(WordSig ws) {
-        if(this.getSignature().equals(ws.getSignature())) {
-            return this.getWords().compareTo(ws.getWords());
-        }
-        else {
-            return this.getSignature().compareTo(ws.getSignature());
-        }
+        if(this.signature.length()<ws.signature.length()){
+			return -1;
+		}else if(this.signature.length()>ws.signature.length()){
+			return 1;
+		}else{
+			return this.signature.compareTo(ws.signature);
+		}
     }
+
+    /**
+     * This method returns a string representing the word and signature of the WordSig Object.
+     * @return the String type of WordSig.
+     */
+    @Override
+    public String toString() {
+        return this.words + ": " + this.signature;
+    }
+
+    /**
+	 * Compares this WordSig's signature with given WordSig's signature.
+	 * Returns true if the two signatures are the same.
+	 * @param other A WordSig Object
+	 * @return If signatures of the two WordSig's are equal returns true, else false.
+	 */
+	public boolean equals(WordSig ws) {
+		if((this.words.equals(ws.getWords())) && (this.signature.equals(ws.getWords()))){
+			return true;
+		}
+		return false;
+	}
 }
