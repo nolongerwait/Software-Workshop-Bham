@@ -84,6 +84,7 @@ public class ListDictionary implements Dictionary {
 
     /**
      * This method searches the dictionary using a binary search method to find a given signature.
+     * This method will be more efficient than the Part1 since it do not need read the file every time and the binary search will save time in average.
      * @param signature The given signature which the words will be matched
      * @return All the words which match the given signature.
      */

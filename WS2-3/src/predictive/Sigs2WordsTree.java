@@ -1,8 +1,8 @@
 package predictive;
 
-public class Sigs2WordsList {
+public class Sigs2WordsTree {
     public static void main(String[] args) {
-        ListDictionary dic = new ListDictionary("/usr/share/dict/words");
+        TreeDictionary dic = new TreeDictionary("/usr/share/dict/words");
 
         for(String itor:args) {
             System.out.println(itor + " : " + dic.signatureToWords(itor));

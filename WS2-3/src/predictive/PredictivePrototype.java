@@ -63,7 +63,7 @@ public class PredictivePrototype {
         try
         {
             scanner = new Scanner(new
-            FileInputStream("/Users/welkin/eclipse-workspace/WS2-3/src/predictive/words"));
+            FileInputStream("/usr/share/dict/words"));
         }catch(FileNotFoundException e)
         {
             System.out.println("File words was no found");
