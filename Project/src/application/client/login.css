@@ -1,0 +1,77 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+/* logo */
+.logo{
+	-fx-text-fill: white;
+	-fx-font-size: 18;
+}
+
+/* Register Button */
+.reg{
+	-fx-background-color: rgba(0,0,0,0);
+	-fx-text-fill: #999;
+	-fx-cursor: hand;
+}
+.reg:hover{
+	-fx-text-fill: #333;
+}
+/** Login Button */
+.login-button{
+	-fx-background-color: rgba(2,184,250,0.8);
+	-fx-background-radius: 3; 
+	-fx-font-family: "微软雅黑"; 
+	-fx-font-size: 16; 
+	-fx-text-fill: white;
+	-fx-cursor: hand;
+}
+.login-button:hover{
+	-fx-background-color: rgba(2,184,250,1);
+}
+
+.minimizeWindow:hover{
+	-fx-background-color: rgba(0,0,0,.5);
+}
+
+/* Login Setting Button */
+#setting{
+	-fx-background-image: url("/application/res/setting.png");
+	-fx-background-color: rgba(0,0,0,0);
+	-fx-background-size: 15px;
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: 8px 8px;
+}
+#setting:hover{
+	-fx-background-color: rgba(255,0,0,0.3);
+}
+/* Minimize Window Button */
+#minimizeWindow{
+	-fx-background-image: url("/application/res/min.png");
+	-fx-background-color: rgba(0,0,0,0);
+	-fx-background-size: 15px;
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: 8px 8px;
+}
+#minimizeWindow:hover{
+	-fx-background-color: rgba(255,0,0,0.3);
+}
+/* Close Button */
+#closeWindow{
+	-fx-background-image: url("/application/res/close.png");
+	-fx-background-color: rgba(0,0,0,0);
+	-fx-background-size: 15px;
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: 8px 8px;
+}
+#closeWindow:hover{
+	-fx-background-color: rgba(255,0,0,0.7);
+}
+
+.tooltip
+{
+	-fx-font-size: 12;
+}
+
+.custom-tooltip
+{
+	-fx-background-color: rgb(255,255,219);
+	-fx-text-fill: #666;
+}

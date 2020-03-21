@@ -25,6 +25,9 @@ See this file [WS2-2.pdf](Files/WS2-2.pdf)
 ## WorkSheet 2-3
 See this file [WS2-3.pdf](Files/WS2-3.pdf)
 
+# Group Project
+See this file [Project.pdf](Files/project.pdf)
+
 ## Extra Work 1
 See this file [ew1.pdf](Files/ew1.pdf)
 
