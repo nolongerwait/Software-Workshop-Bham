@@ -119,7 +119,7 @@ public class Pie extends Application {
     }
 
     /**
-     * This method computes the centre coordinates of Circle because we donot know what width the Text on the Lift of Circle is.
+     * This method computes the centre coordinates of Circle because we donot know what width the Text on the Left of Circle is.
      * @param radiusPie The radius of Pie, as double.
      * @param gapTextPie
      * @param angleOfTexts The angle of Each Text in Pie Chart, as ArrayList<Double>.
