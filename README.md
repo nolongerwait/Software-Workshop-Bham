@@ -1,5 +1,5 @@
 # Introduction
-The worksheet of Software Workshop in the University of Birmingham
+The worksheet of Software Workshop in the University of Birmingham 
 
 ## WorkSheet 1-1
 See this file [WS1-1.pdf](Files/WS1-1.pdf)
@@ -27,9 +27,3 @@ See this file [WS2-3.pdf](Files/WS2-3.pdf)
 
 ## Group Project
 See this file [Project.pdf](Files/project.pdf)
-
-## Extra Work 1
-See this file [ew1.pdf](Files/ew1.pdf)
-
-## Extra Work 2
-See this file [ew2.pdf](Files/ew2.pdf)

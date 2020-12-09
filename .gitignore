@@ -2,7 +2,7 @@
 .settings
 .settings/
 .project
-
+bin/
 # Compiled class file
 *.class
 
@@ -29,7 +29,7 @@ hs_err_pid*
 .metadata
 .vscode
 .DS_Store
+
 # vs code
 .classpath
-# gitignore
 .gitignore
